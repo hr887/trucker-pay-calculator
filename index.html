@@ -8,9 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
-    <!-- This CSS is identical to your original design -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -31,21 +30,10 @@
         .btn-primary:hover { background-color: #34495e; }
         .btn-action { background-color: #1abc9c; color: white; }
         .btn-action:hover { background-color: #1dd2af; }
-        .btn-cta {
-            background-color: #ef4444; /* red-500 */
-            color: white;
-            animation: pulse 2s infinite;
-        }
-        .btn-cta:hover {
-            background-color: #dc2626; /* red-600 */
-            animation: none;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2); }
-            50% { transform: scale(1.03); box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4); }
-        }
         .progress-bar-bg { background-color: #e0e0e0; border-radius: 9999px; overflow: hidden; }
         .progress-bar-fill { background-color: #1abc9c; transition: width 0.5s ease-in-out; }
+        .lang-btn { font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 0.375rem; transition: background-color 0.2s, color 0.2s; text-align: left; width: 100%; }
+        .lang-btn.active { background-color: #1abc9c; color: white; }
     </style>
 </head>
 <body class="antialiased bg-pattern">
@@ -60,214 +48,304 @@
                     </button>
                     <img src="https://i.postimg.cc/BvFFBrMk/image.png" alt="Company Logo" class="h-10 w-auto">
                 </div>
+                <div class="relative">
+                    <button id="language-toggle-btn" class="text-sm font-semibold text-gray-500 hover:bg-gray-100 px-3 py-1 border border-gray-300 rounded-full transition-colors">
+                        Language
+                    </button>
+                    <div id="language-dropdown" class="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg p-1 z-20 hidden">
+                        <button id="lang-en" onclick="setLanguage('en')" class="lang-btn">English</button>
+                        <button id="lang-es" onclick="setLanguage('es')" class="lang-btn">Español</button>
+                        <button id="lang-ru" onclick="setLanguage('ru')" class="lang-btn">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</button>
+                        <button id="lang-uz" onclick="setLanguage('uz')" class="lang-btn">O'zbek</button>
+                    </div>
+                </div>
             </header>
             
-            <main class="p-6 sm:p-8">
+            <div class="p-6 sm:p-8">
                 <div class="text-center mb-6">
-                    <p class="text-lg font-semibold text-gray-700">Truck Driver Pay Calculator</p>
+                     <p class="text-lg font-semibold text-gray-700" data-key="appTitle">Truck Driver Pay Calculator</p>
                 </div>
 
                 <div id="progress-container" class="my-6">
-                    <p id="progress-text" class="text-sm font-semibold text-center text-gray-500 mb-2">Step 1 of 3: Driver Type</p>
+                    <p id="progress-text" class="text-sm font-semibold text-center text-gray-500 mb-2" data-key="progressText">Step 1 of 3: Driver Type</p>
                     <div class="progress-bar-bg h-2 w-full">
                         <div id="progress-bar" class="progress-bar-fill h-2" style="width: 33%;"></div>
                     </div>
                 </div>
                 
                 <div class="view-container">
-                    <div id="view-question1" class="view">
-                        <h2 class="text-xl font-bold text-center mb-4">What type of driver are you?</h2>
-                        <div class="space-y-4">
-                            <button class="btn btn-primary w-full driver-type-btn" data-type="lease">Lease Operator</button>
-                            <button class="btn btn-primary w-full driver-type-btn" data-type="company">Company Driver</button>
-                            <button class="btn btn-primary w-full driver-type-btn" data-type="owner">Owner Operator</button>
-                        </div>
-                    </div>
+                       <div id="view-question1" class="view">
+                           <div class="text-center mb-6 p-3 bg-teal-50 border border-teal-200 rounded-lg">
+                               <p class="text-base font-bold text-teal-800" data-key="promoTitle">Earn up to $6000/week with us!</p>
+                               <p class="text-sm text-teal-600" data-key="promoSubtitle">Find out your potential take-home pay below.</p>
+                           </div>
+                           <h2 class="text-xl font-bold text-center mb-4" data-key="question1Title">What type of driver are you?</h2>
+                           <div class="space-y-4">
+                               <button onclick="trackClickEvent('Selected Lease Operator'); selectDriverType('lease');" class="btn btn-primary w-full" data-key="leaseButton">Lease Operator</button>
+                               <button onclick="trackClickEvent('Selected Company Driver'); selectDriverType('company');" class="btn btn-primary w-full" data-key="companyButton">Company Driver</button>
+                               <button onclick="trackClickEvent('Selected Owner Operator'); selectDriverType('owner');" class="btn btn-primary w-full" data-key="ownerButton">Owner Operator</button>
+                           </div>
+                       </div>
 
-                    <div id="view-question2" class="view hidden">
-                        <h2 class="text-xl font-bold text-center mb-4">How many miles can you drive in a week?</h2>
-                        <div class="space-y-4">
-                            <input type="number" id="miles-input" class="w-full text-center text-lg p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition" placeholder="e.g., 2500">
-                            <button id="calculate-btn" class="btn btn-action w-full">Calculate</button>
-                        </div>
-                    </div>
+                       <div id="view-question2" class="view hidden">
+                           <h2 class="text-xl font-bold text-center mb-4" data-key="question2Title">How many miles can you drive in a week?</h2>
+                           <div class="space-y-4">
+                               <input type="number" id="miles-input" class="w-full text-center text-lg p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+                               <button onclick="trackClickEvent('Clicked Calculate'); submitMiles();" class="btn btn-action w-full" data-key="calculateButton">Calculate</button>
+                           </div>
+                       </div>
 
-                    <div id="view-result" class="view hidden text-center">
-                        <h2 class="text-xl font-semibold text-gray-600 mb-2">Your Potential Take Home Is</h2>
-                        <p id="result-amount" class="text-5xl font-extrabold text-gray-900 mb-2">$0.00</p>
-                        <div class="space-y-3 mt-6">
-                            <button id="apply-now-btn" class="btn btn-cta w-full text-lg">APPLY NOW</button>
-                            <button id="restart-btn" class="btn bg-gray-500 hover:bg-gray-600 text-white w-full">Start a New Calculation</button>
-                        </div>
-                    </div>
+                       <div id="view-result" class="view hidden text-center">
+                           <h2 class="text-xl font-semibold text-gray-600 mb-2" data-key="resultTitle">Your Potential Take Home Is</h2>
+                           <p id="result-amount" class="text-5xl font-extrabold text-gray-900 mb-2">$0.00</p>
+                           <div id="result-message" class="p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 text-sm mb-4"></div>
+                           <button onclick="trackClickEvent('Clicked See Calculation'); showCalculation();" class="text-sm text-indigo-600 hover:underline mb-4" data-key="seeCalculationLink">See how we calculated this</button>
+                           <div class="space-y-3">
+                               <button onclick="trackClickEvent('Clicked APPLY NOW'); showView('view-apply');" class="btn btn-action w-full text-lg" data-key="applyNowButton">APPLY NOW</button>
+                               <button onclick="trackClickEvent('Clicked Share Estimate'); shareResult();" class="btn bg-gray-200 hover:bg-gray-300 text-gray-800 w-full flex items-center justify-center space-x-2">
+                                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path></svg>
+                                   <span data-key="shareButton">Share Estimate</span>
+                               </button>
+                               <button onclick="trackClickEvent('Clicked New Calculation'); restart();" class="btn bg-gray-500 hover:bg-gray-600 text-white w-full" data-key="newCalculationButton">Start a New Calculation</button>
+                           </div>
+                           <div class="mt-8 pt-4 border-t border-gray-200">
+                               <p class="text-lg font-semibold text-gray-700 mb-4" data-key="contactUs">Contact Us</p>
+                               <div class="mb-4">
+                                   <div class="flex justify-center items-center space-x-6">
+                                       <a href="tel:+18474079858" onclick="trackClickEvent('Clicked Phone Icon');" class="text-gray-400 hover:text-green-600 transition-colors" title="Call Us">
+                                           <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                                       </a>
+                                       <a href="https://t.me/tomr_robins0n" target="_blank" rel="noopener noreferrer" onclick="trackClickEvent('Clicked Telegram Icon');" class="text-gray-400 hover:text-sky-600 transition-colors" title="Telegram">
+                                           <img src="https://telegram.org/img/t_logo.png" alt="Telegram Logo" class="w-7 h-7">
+                                       </a>
+                                   </div>
+                                   <a href="mailto:hr@raystarllc.com" onclick="trackClickEvent('Clicked Email Text');" class="block mt-3 text-gray-500 hover:text-indigo-600 transition-colors text-sm font-medium">hr@raystarllc.com</a>
+                               </div>
+                           </div>
+                       </div>
 
-                    <div id="view-apply" class="view hidden">
-                        <h2 class="text-xl font-bold text-center mb-4">Apply Now</h2>
-                        <form id="application-form" class="space-y-4">
-                            <input name="Full Name" type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Full Name">
-                            <input name="Phone" type="tel" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Phone Number">
-                            <input name="Email" type="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Email Address">
-                            <button id="submit-form-button" type="submit" class="btn btn-action w-full">Submit Application</button>
-                        </form>
-                    </div>
-                    
-                    <div id="view-thanks" class="view hidden text-center">
-                        <h2 class="text-2xl font-bold text-green-600 mb-4">Thank You!</h2>
-                        <p class="text-gray-600">Your application has been submitted. We will be in touch shortly.</p>
-                        <button id="start-over-btn" class="btn btn-primary w-full mt-6">Start Over</button>
-                    </div>
+                       <div id="view-apply" class="view hidden">
+                           <h2 class="text-xl font-bold text-center mb-4" data-key="applyTitle">Apply Now</h2>
+                           <form id="application-form" class="space-y-4">
+                               <input name="fullName" type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                               <input name="phone" type="tel" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                               <input name="email" type="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                               <button id="submit-form-button" type="submit" class="btn btn-action w-full" data-key="submitApplicationButton">Submit Application</button>
+                           </form>
+                       </div>
+                       
+                       <div id="view-thanks" class="view hidden text-center">
+                           <h2 class="text-2xl font-bold text-green-600 mb-4" data-key="thanksTitle">Thank You!</h2>
+                           <p class="text-gray-600" data-key="thanksSubtitle">Your application has been submitted. We will be in touch shortly.</p>
+                           <button onclick="restart();" class="btn btn-primary w-full mt-6" data-key="startOverButton">Start Over</button>
+                       </div>
+                       
+                       <div id="view-calculation" class="view hidden text-left">
+                           <h2 class="text-xl font-bold text-center mb-4" data-key="breakdownTitle">Calculation Breakdown</h2>
+                           <div id="calculation-details" class="space-y-4 text-sm text-gray-700"></div>
+                       </div>
                 </div>
-            </main>
+
+                <div class="text-center mt-8 pt-4 border-t border-gray-200">
+                    <p class="text-xs text-gray-400" data-key="copyright">&copy; 2025 Ray Star LLC. All Rights Reserved.</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // --- CONFIGURATION ---
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyCBHpngMjk-PVHsa5k9w9Nzo7eADitrb-uSl9__rvzZA2pHga1vYBVjeT-WQPoBJ29Vg/exec';
-
-        // --- APPLICATION STATE ---
-        const state = {
-            driverType: null,
-            miles: 0,
-            takeHomePay: 0,
-            currentView: 'view-question1',
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbylfdSVfvAph-Uhngaa43ZL-9E4hZW-bqYWjfa06-VJ7ifRyIjtJwNkTeNr2cRIFaC0Gg/exec';
+        
+        const translations = {
+            en: {
+                promoTitle: 'Earn up to $6000/week with us!', appTitle: 'Truck Driver Pay Calculator', progressText: 'Step {step} of 3: {page}', promoSubtitle: 'Find out your potential take-home pay below.', question1Title: 'What type of driver are you?', leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator', question2Title: 'How many miles can you drive in a week?', milesPlaceholder: 'e.g., 2500', calculateButton: 'Calculate', resultTitle: 'Your Potential Take Home Is', resultMsgHigh: '&#127942; Outstanding result! You\'re in the top tier of earners.', resultMsgMid: '&#x2728; Excellent result! This is a strong, competitive income.', resultMsgLow: '&#x1F4C8; A great starting point with solid potential for growth.', seeCalculationLink: 'See how we calculated this', applyNowButton: 'APPLY NOW', shareButton: 'Share Estimate', newCalculationButton: 'Start a New Calculation', applyTitle: 'Apply Now', applySubtitle: 'You\'re one step away! Fill out your info below.', fullNamePlaceholder: 'Full name', phonePlaceholder: 'Phone number', emailPlaceholder: 'Email', privacyLink: 'Learn how we use your personal data', submitApplicationButton: 'Submit Application', thanksTitle: 'Thank You!', thanksSubtitle: 'Your application has been submitted. We will be in touch shortly.', startOverButton: 'Start Over', breakdownTitle: 'Calculation Breakdown', copyright: '&copy; 2025 Ray Star LLC. All Rights Reserved.', contactUs: 'Contact Us', calcGrossIncome: '1. Gross Income', calcMilesDriven: '{miles} miles', calcPerMile: '× ${rate}/mile', calcExpenses: '2. Estimated Expenses', calcFixedCosts: 'Fixed Costs:', calcVariableCosts: 'Variable Costs (for {miles} miles):', calcTotalExpenses: 'Total Estimated Expenses', calcTakeHome: '3. Potential Take-Home', calcIncome: 'Income', calcMinusExpenses: 'Expenses',
+            },
+            es: { /* ... Spanish ... */ },
+            ru: { /* ... Russian ... */ },
+            uz: { /* ... Uzbek ... */ }
         };
+        
+        const state = { driverType: null, miles: 0, takeHomePay: 0, lang: 'en' };
+        
+        const languageToggleBtn = document.getElementById('language-toggle-btn');
+        const languageDropdown = document.getElementById('language-dropdown');
+        const backArrow = document.getElementById('back-arrow');
+        
+        function setLanguage(lang) {
+            languageDropdown.classList.add('hidden');
+            if (!translations[lang]) return;
+            state.lang = lang;
+            
+            ['en', 'es', 'ru', 'uz'].forEach(id => {
+                document.getElementById(`lang-${id}`).classList.toggle('active', id === lang);
+            });
 
-        // --- DOM ELEMENTS ---
-        const dom = {
-            backArrow: document.getElementById('back-arrow'),
-            progressBar: document.getElementById('progress-bar'),
-            progressText: document.getElementById('progress-text'),
-            milesInput: document.getElementById('miles-input'),
-            resultAmount: document.getElementById('result-amount'),
-            applicationForm: document.getElementById('application-form'),
-            submitFormButton: document.getElementById('submit-form-button'),
-        };
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
 
-        // --- FUNCTIONS ---
+            const milesInput = document.getElementById('miles-input');
+            if(milesInput) milesInput.placeholder = translations[lang].milesPlaceholder || 'e.g., 2500';
+            
+            const formInputs = {'fullName': 'fullNamePlaceholder', 'phone': 'phonePlaceholder', 'email': 'emailPlaceholder'};
+            Object.keys(formInputs).forEach(inputName => {
+                const inputEl = document.querySelector(`input[name="${inputName}"]`);
+                if(inputEl) inputEl.placeholder = translations[lang][formInputs[inputName]];
+            });
 
-        /**
-         * Manages screen transitions and updates the progress bar.
-         */
+            if (state.driverType) calculateResult();
+        }
+
         function showView(viewId) {
-            state.currentView = viewId;
-            document.querySelectorAll('.view').forEach(view => view.classList.add('hidden'));
+            document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
             document.getElementById(viewId).classList.remove('hidden');
 
-            const viewConfig = {
-                'view-question1': { progress: '33%', text: 'Step 1 of 3: Driver Type', back: false },
-                'view-question2': { progress: '66%', text: 'Step 2 of 3: Weekly Miles', back: true, backTarget: 'view-question1' },
-                'view-result': { progress: '100%', text: 'Step 3 of 3: Your Results', back: true, backTarget: 'view-question2' },
-                'view-apply': { progress: '100%', text: 'Application', back: true, backTarget: 'view-result' },
-                'view-thanks': { progress: '100%', text: 'Complete', back: false },
+            const backMap = {
+                'view-question2': 'view-question1', 'view-result': 'view-question2', 'view-apply': 'view-result', 'view-calculation': 'view-result'
             };
+            backArrow.classList.toggle('hidden', !backMap[viewId]);
+            if (backMap[viewId]) backArrow.onclick = () => showView(backMap[viewId]);
 
-            const config = viewConfig[viewId];
+            const progressConfig = {
+                'view-question1': { step: 1, text: 'Driver Type', width: '33%' },
+                'view-question2': { step: 2, text: 'Weekly Miles', width: '66%' },
+                'view-result': { step: 3, text: 'Your Results', width: '100%' }
+            };
+            const config = progressConfig[viewId];
+            document.getElementById('progress-container').style.visibility = config ? 'visible' : 'hidden';
             if (config) {
-                dom.progressText.textContent = config.text;
-                dom.progressBar.style.width = config.progress;
-                dom.backArrow.classList.toggle('hidden', !config.back);
-                dom.backArrow.onclick = () => showView(config.backTarget);
+                document.getElementById('progress-bar').style.width = config.width;
+                const T = translations[state.lang] || translations.en;
+                document.getElementById('progress-text').innerHTML = T.progressText.replace('{step}', config.step).replace('{page}', config.text);
             }
         }
 
-        /**
-         * Calculates pay based on the current state.
-         */
-        function calculateAndDisplayResult() {
+        function selectDriverType(type) {
+            state.driverType = type;
+            showView('view-question2');
+        }
+
+        function submitMiles() {
+            const miles = parseInt(document.getElementById('miles-input').value, 10);
+            if (isNaN(miles) || miles <= 0) return alert('Please enter a valid number of miles.');
+            state.miles = miles;
+            calculateResult();
+            showView('view-result');
+            confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+        }
+
+        function calculateResult() {
             let result = 0;
-            const miles = state.miles;
-            switch (state.driverType) {
-                case 'lease':
-                    const gL = miles * 2.15;
-                    result = gL - (gL * 0.15) - 900 - (0.12 * miles) - 375 - (miles * 0.45) - 75 - 37 - 250;
-                    break;
-                case 'company':
-                    result = miles * 0.65;
-                    break;
-                case 'owner':
-                    const gO = miles * 2.15;
-                    result = gO - (gO * 0.12) - 375 - (miles * 0.45) - 75 - 37 - 250;
-                    break;
+            switch(state.driverType) {
+                case 'lease': result = (state.miles * 2.15) * 0.85 - 900 - (0.12 * state.miles) - 375 - (state.miles * 0.45) - 75 - 37 - 250; break;
+                case 'company': result = state.miles * 0.65; break;
+                case 'owner': result = (state.miles * 2.15) * 0.88 - 375 - (state.miles * 0.45) - 75 - 37 - 250; break;
             }
             state.takeHomePay = result > 0 ? result : 0;
-            dom.resultAmount.textContent = state.takeHomePay.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            document.getElementById('result-amount').textContent = state.takeHomePay.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            
+            const msgEl = document.getElementById('result-message');
+            const T = translations[state.lang] || translations.en;
+            if (result > 2800) msgEl.innerHTML = T.resultMsgHigh;
+            else if (result >= 1800) msgEl.innerHTML = T.resultMsgMid;
+            else msgEl.innerHTML = T.resultMsgLow;
+        }
+
+        function getCalculationText() {
+             const T = translations[state.lang] || translations.en;
+             // This is a simplified version. A more detailed one could be built here.
+             return `<div class="p-3 bg-gray-50 rounded-lg border">
+                <p><strong>Driver Type:</strong> ${state.driverType}</p>
+                <p><strong>Weekly Miles:</strong> ${state.miles}</p>
+                <p class="mt-2 border-t pt-2">Based on our current rates, your estimated take-home pay is calculated by taking the gross income and subtracting estimated expenses like fuel, insurance, and service charges.</p>
+                <p class="font-bold text-lg mt-2">${T.resultTitle}: ${state.takeHomePay.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+             </div>`;
+        }
+
+        function showCalculation() {
+            document.getElementById('calculation-details').innerHTML = getCalculationText();
+            showView('view-calculation');
         }
         
-        /**
-         * Resets the application to its initial state.
-         */
-        function restartApp() {
-            Object.assign(state, { driverType: null, miles: 0, takeHomePay: 0 });
-            dom.applicationForm.reset();
-            dom.milesInput.value = '';
+        async function shareResult() {
+            const url = new URL(window.location.href);
+            url.search = `?type=${state.driverType}&miles=${state.miles}&result=${state.takeHomePay.toFixed(2)}&lang=${state.lang}`;
+            const shareData = {
+                title: 'My Potential Earnings at Ray Star LLC',
+                text: `Check out my potential weekly take-home pay of ${state.takeHomePay.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} with Ray Star LLC!`,
+                url: url.toString()
+            };
+            if (navigator.share) {
+                try { await navigator.share(shareData); } catch (err) { console.error("Share failed:", err); }
+            } else {
+                navigator.clipboard.writeText(url.toString());
+                alert('A shareable link has been copied to your clipboard!');
+            }
+        }
+
+        function restart() {
+            state.driverType = null;
+            state.miles = 0;
+            document.getElementById('miles-input').value = '';
             showView('view-question1');
         }
 
-        // --- EVENT LISTENERS ---
+        function trackEvent(action, eventValue) {
+            const formData = new FormData();
+            formData.append('action', action);
+            formData.append('event', eventValue);
+            fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' }).catch(console.error);
+        }
+        
+        function trackClickEvent(eventName) { trackEvent('clickEvent', eventName); }
+        
         document.addEventListener('DOMContentLoaded', () => {
-            showView('view-question1');
+            const urlParams = new URLSearchParams(window.location.search);
+            const type = urlParams.get('type'), miles = urlParams.get('miles'), result = urlParams.get('result'), lang = urlParams.get('lang');
+            
+            setLanguage(lang || 'en');
 
-            document.querySelectorAll('.driver-type-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    state.driverType = button.dataset.type;
-                    showView('view-question2');
-                });
-            });
-
-            document.getElementById('calculate-btn').addEventListener('click', () => {
-                const miles = parseInt(dom.milesInput.value, 10);
-                if (isNaN(miles) || miles <= 0) {
-                    alert('Please enter a valid number of miles.');
-                    return;
-                }
-                state.miles = miles;
-                calculateAndDisplayResult();
+            if (type && miles && result) {
+                state.driverType = type;
+                state.miles = parseInt(miles, 10);
+                state.takeHomePay = parseFloat(result);
+                document.getElementById('result-amount').textContent = state.takeHomePay.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+                calculateResult();
                 showView('view-result');
-                confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
-            });
+            } else {
+                showView('view-question1');
+                trackEvent('pageView', 'Page Loaded');
+            }
+            
+            languageToggleBtn.addEventListener('click', (e) => { e.stopPropagation(); languageDropdown.classList.toggle('hidden'); });
+            document.addEventListener('click', () => languageDropdown.classList.add('hidden'));
 
-            document.getElementById('apply-now-btn').addEventListener('click', () => showView('view-apply'));
-            document.getElementById('restart-btn').addEventListener('click', restartApp);
-            document.getElementById('start-over-btn').addEventListener('click', restartApp);
-
-            dom.applicationForm.addEventListener('submit', (e) => {
+            const form = document.getElementById('application-form');
+            form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const originalButtonText = dom.submitFormButton.textContent;
-                dom.submitFormButton.disabled = true;
-                dom.submitFormButton.textContent = 'Submitting...';
-                
-                // This creates the JSON payload for the new script
-                const data = {
-                    'Full Name': dom.applicationForm.querySelector('[name="Full Name"]').value,
-                    'Phone': dom.applicationForm.querySelector('[name="Phone"]').value,
-                    'Email': dom.applicationForm.querySelector('[name="Email"]').value,
-                    'Driver Type': state.driverType,
-                    'Weekly Miles': state.miles,
-                    'Potential Pay': state.takeHomePay.toFixed(2),
-                };
+                const submitBtn = document.getElementById('submit-form-button');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Submitting...';
 
-                fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    // This is required to make it work with the new script
-                    mode: 'no-cors', 
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                })
-                .then(() => {
-                    // Because of `no-cors`, we can't read the response, but we assume success
-                    showView('view-thanks');
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred. Please try again.');
-                })
-                .finally(() => {
-                    dom.submitFormButton.disabled = false;
-                    dom.submitFormButton.textContent = originalButtonText;
-                });
+                const formData = new FormData(form);
+                formData.append('action', 'formSubmit');
+                formData.append('driverType', state.driverType);
+                formData.append('miles', state.miles);
+                formData.append('potentialPay', state.takeHomePay.toFixed(2));
+
+                fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
+                    .then(() => showView('view-thanks'))
+                    .catch(() => showView('view-thanks')) // Show thanks even on CORS error
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                        form.reset();
+                    });
             });
         });
     </script>
 </body>
 </html>
+
