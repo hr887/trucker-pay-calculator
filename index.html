@@ -119,7 +119,6 @@
                            <p id="result-amount" class="text-5xl font-extrabold text-gray-900 mb-2">$0.00</p>
                            <div id="result-message" class="p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 text-sm mb-4"></div>
                            
-                           <!-- UPDATED: "See Calculation" button is now styled as a link -->
                            <button onclick="trackClickEvent('Clicked See Calculation'); showCalculation();" class="text-sm text-indigo-600 hover:underline font-semibold py-2 mb-4" data-key="seeCalculationLink">See how we calculated this</button>
                            
                            <div class="space-y-3">
@@ -185,19 +184,61 @@
                 calcGrossIncome: '1. Gross Income', calcMilesDriven: '{miles} miles', calcPerMile: '× ${rate}/mile', calcExpenses: '2. Estimated Expenses', calcFixedCosts: 'Fixed Costs:', calcVariableCosts: 'Variable Costs (for {miles} miles):', calcTotalExpenses: 'Total Estimated Expenses', calcTakeHome: '3. Potential Take-Home', calcIncome: 'Income', calcMinusExpenses: 'Expenses'
             },
             es: {
-                promoTitle: '¡Gana hasta $6000/semana con nosotros!', appTitle: 'Calculadora de Pago para Camioneros', progressText: 'Paso {step} de 3: {page}', promoSubtitle: 'Descubre tu pago potencial a continuación.', question1Title: '¿Qué tipo de conductor eres?', leaseButton: 'Operador de Arrendamiento', companyButton: 'Conductor de Compañía', ownerButton: 'Propietario Operador', question2Title: '¿Cuántas millas puedes conducir en una semana?', milesPlaceholder: 'ej., 2500', calculateButton: 'Calcular', resultTitle: 'Tu Pago Potencial Es', resultMsgHigh: '&#127942; ¡Resultado sobresaliente! Estás en el nivel más alto de ingresos.', resultMsgMid: '&#x2728; ¡Excelente resultado! Este es un ingreso fuerte y competitivo.', resultMsgLow: '&#x1F4C8; Un gran punto de partida con un sólido potencial de crecimiento.', seeCalculationLink: 'Ver cómo calculamos esto', applyNowButton: 'APLICAR AHORA', shareButton: 'Compartir Estimación', newCalculationButton: 'Empezar un Nuevo Cálculo', applyTitle: 'Aplicar Ahora', applySubtitle: '¡Estás a un paso! Completa tu información.', fullNamePlaceholder: 'Nombre completo', phonePlaceholder: 'Número de teléfono', emailPlaceholder: 'Correo electrónico', submitApplicationButton: 'Enviar Solicitud', thanksTitle: '¡Gracias!', thanksSubtitle: 'Tu solicitud ha sido enviada. Nos pondremos en contacto pronto.', startOverButton: 'Empezar de Nuevo', breakdownTitle: 'Desglose del Cálculo', copyright: '&copy; 2025 Ray Star LLC. Todos los derechos reservados.', contactUs: 'Contáctanos', companyDriverTitle: 'Pago de Conductor de Compañía',
+                promoTitle: '¡Gana hasta $6000/semana con nosotros!', appTitle: 'Calculadora de Pago para Camioneros', progressText: 'Paso {step} de 3: {page}', promoSubtitle: 'Descubre tu pago potencial a continuación.', question1Title: '¿Qué tipo de conductor eres?', leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator', question2Title: '¿Cuántas millas puedes conducir en una semana?', milesPlaceholder: 'ej., 2500', calculateButton: 'Calcular', resultTitle: 'Tu Pago Potencial Es', resultMsgHigh: '&#127942; ¡Resultado sobresaliente! Estás en el nivel más alto de ingresos.', resultMsgMid: '&#x2728; ¡Excelente resultado! Este es un ingreso fuerte y competitivo.', resultMsgLow: '&#x1F4C8; Un gran punto de partida con un sólido potencial de crecimiento.', seeCalculationLink: 'Ver cómo calculamos esto', applyNowButton: 'APLICAR AHORA', shareButton: 'Compartir Estimación', newCalculationButton: 'Empezar un Nuevo Cálculo', applyTitle: 'Aplicar Ahora', applySubtitle: '¡Estás a un paso! Completa tu información.', fullNamePlaceholder: 'Nombre completo', phonePlaceholder: 'Número de teléfono', emailPlaceholder: 'Correo electrónico', submitApplicationButton: 'Enviar Solicitud', thanksTitle: '¡Gracias!', thanksSubtitle: 'Tu solicitud ha sido enviada. Nos pondremos en contacto pronto.', startOverButton: 'Empezar de Nuevo', breakdownTitle: 'Desglose del Cálculo', copyright: '&copy; 2025 Ray Star LLC. Todos los derechos reservados.', contactUs: 'Contáctanos', companyDriverTitle: 'Pago de Conductor de Compañía',
                 progressStep1: 'Tipo de Conductor', progressStep2: 'Millas Semanales', progressStep3: 'Tus Resultados',
                 calcGrossIncome: '1. Ingresos Brutos', calcMilesDriven: '{miles} millas', calcPerMile: '× ${rate}/milla', calcExpenses: '2. Gastos Estimados', calcFixedCosts: 'Costos Fijos:', calcVariableCosts: 'Costos Variables (para {miles} millas):', calcTotalExpenses: 'Total de Gastos Estimados', calcTakeHome: '3. Pago Potencial', calcIncome: 'Ingresos', calcMinusExpenses: 'Gastos'
             },
             ru: {
-                promoTitle: 'Зарабатывайте до $6000 в неделю с нами!', appTitle: 'Калькулятор Зарплаты Водителя', progressText: 'Шаг {step} из 3: {page}', promoSubtitle: 'Узнайте вашу потенциальную зарплату ниже.', question1Title: 'Какой вы тип водителя?', leaseButton: 'Водитель в лизинге', companyButton: 'Водитель компании', ownerButton: 'Владелец-оператор', question2Title: 'Сколько миль вы проезжаете в неделю?', milesPlaceholder: 'например, 2500', calculateButton: 'Рассчитать', resultTitle: 'Ваш Потенциальный Доход', resultMsgHigh: '&#127942; Выдающийся результат! Вы входите в число самых высокооплачиваемых водителей.', resultMsgMid: '&#x2728; Отличный результат! Это сильный, конкурентоспособный доход.', resultMsgLow: '&#x1F4C8; Отличная отправная точка с солидным потенциалом для роста.', seeCalculationLink: 'Посмотреть расчеты', applyNowButton: 'ПОДАТЬ ЗАЯВКУ', shareButton: 'Поделиться расчетом', newCalculationButton: 'Начать новый расчет', applyTitle: 'Подать заявку', applySubtitle: 'Остался один шаг! Заполните ваши данные.', fullNamePlaceholder: 'Полное имя', phonePlaceholder: 'Номер телефона', emailPlaceholder: 'Электронная почта', submitApplicationButton: 'Отправить заявку', thanksTitle: 'Спасибо!', thanksSubtitle: 'Ваша заявка отправлена. Мы скоро с вами свяжемся.', startOverButton: 'Начать сначала', breakdownTitle: 'Детализация Расчета', copyright: '&copy; 2025 Ray Star LLC. Все права защищены.', contactUs: 'Свяжитесь с нами', companyDriverTitle: 'Зарплата водителя компании',
+                promoTitle: 'Зарабатывайте до $6000 в неделю с нами!', appTitle: 'Калькулятор Зарплаты Водителя', progressText: 'Шаг {step} из 3: {page}', promoSubtitle: 'Узнайте вашу потенциальную зарплату ниже.', question1Title: 'Какой вы тип водителя?', leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator', question2Title: 'Сколько миль вы проезжаете в неделю?', milesPlaceholder: 'например, 2500', calculateButton: 'Рассчитать', resultTitle: 'Ваш Потенциальный Доход', resultMsgHigh: '&#127942; Выдающийся результат! Вы входите в число самых высокооплачиваемых водителей.', resultMsgMid: '&#x2728; Отличный результат! Это сильный, конкурентоспособный доход.', resultMsgLow: '&#x1F4C8; Отличная отправная точка с солидным потенциалом для роста.', seeCalculationLink: 'Посмотреть расчеты', applyNowButton: 'ПОДАТЬ ЗАЯВКУ', shareButton: 'Поделиться расчетом', newCalculationButton: 'Начать новый расчет', applyTitle: 'Подать заявку', applySubtitle: 'Остался один шаг! Заполните ваши данные.', fullNamePlaceholder: 'Полное имя', phonePlaceholder: 'Номер телефона', emailPlaceholder: 'Электронная почта', submitApplicationButton: 'Отправить заявку', thanksTitle: 'Спасибо!', thanksSubtitle: 'Ваша заявка отправлена. Мы скоро с вами свяжемся.', startOverButton: 'Начать сначала', breakdownTitle: 'Детализация Расчета', copyright: '&copy; 2025 Ray Star LLC. Все права защищены.', contactUs: 'Свяжитесь с нами', companyDriverTitle: 'Зарплата водителя компании',
                 progressStep1: 'Тип водителя', progressStep2: 'Мили в неделю', progressStep3: 'Ваши результаты',
                 calcGrossIncome: '1. Валовый доход', calcMilesDriven: '{miles} миль', calcPerMile: '× ${rate}/милю', calcExpenses: '2. Предполагаемые расходы', calcFixedCosts: 'Фиксированные расходы:', calcVariableCosts: 'Переменные расходы (на {miles} миль):', calcTotalExpenses: 'Итого предполагаемых расходов', calcTakeHome: '3. Потенциальный доход', calcIncome: 'Доход', calcMinusExpenses: 'Расходы'
             },
             uz: {
-                promoTitle: 'Biz bilan haftasiga $6000 gacha ishlang!', appTitle: 'Haydovchi Ish Haqini Hisoblash', progressText: 'Qadam {step}/3: {page}', promoSubtitle: 'Potentsial daromadingizni quyida bilib oling.', question1Title: 'Siz qanday turdagi haydovchisiz?', leaseButton: 'Ijara Operator', companyButton: 'Kompaniya Haydovchisi', ownerButton: 'Mulkor Operator', question2Title: 'Haftasiga necha mil haydaysiz?', milesPlaceholder: 'masalan, 2500', calculateButton: 'Hisoblash', resultTitle: 'Sizning Potentsial Daromadingiz', resultMsgHigh: '&#127942; Ajoyib natija! Siz eng yuqori daromad oluvchilar qatoridasiz.', resultMsgMid: '&#x2728; Ajoyib natija! Bu kuchli, raqobatbardosh daromad.', resultMsgLow: '&#x1F4C8; O\'sish uchun yaxshi potentsialga ega ajoyib boshlanish.', seeCalculationLink: 'Qanday hisoblaganimizni ko\'ring', applyNowButton: 'HOZIR MUROJAAT QILING', shareButton: 'Hisob-kitobni Ulashish', newCalculationButton: 'Yangi Hisob-kitob', applyTitle: 'Murojaat Qiling', applySubtitle: 'Bir qadam qoldi! Ma\'lumotlaringizni to\'ldiring.', fullNamePlaceholder: 'To\'liq ism', phonePlaceholder: 'Telefon raqami', emailPlaceholder: 'Elektron pochta', submitApplicationButton: 'Arizani Yuborish', thanksTitle: 'Rahmat!', thanksSubtitle: 'Arizangiz yuborildi. Tez orada siz bilan bog\'lanamiz.', startOverButton: 'Boshidan Boshlash', breakdownTitle: 'Hisob-kitob Tafsilotlari', copyright: '&copy; 2025 Ray Star LLC. Barcha huquqlar himoyalangan.', contactUs: 'Biz bilan bog\'laning', companyDriverTitle: 'Kompaniya haydovchisining ish haqi',
-                progressStep1: 'Haydovchi Turi', progressStep2: 'Haftalik Milya', progressStep3: 'Sizning Natijalaringiz',
-                calcGrossIncome: '1. Yalpi daromad', calcMilesDriven: '{miles} mil', calcPerMile: '× ${rate}/mil uchun', calcExpenses: '2. Taxminiy xarajatlar', calcFixedCosts: 'Doimiy xarajatlar:', calcVariableCosts: 'O\'zgaruvchan xarajatlar ({miles} mil uchun):', calcTotalExpenses: 'Jami taxminiy xarajatlar', calcTakeHome: '3. Potentsial daromad', calcIncome: 'Daromad', calcMinusExpenses: 'Xarajatlar'
+                promoTitle: 'Biz bilan haftasiga $6000 gacha ishlang!', 
+                appTitle: "Trak Driver'ning Sof Foydasini Hisoblaydigan Kalkulyator", 
+                progressText: 'Qadam {step}/3: {page}', 
+                promoSubtitle: "O'zingizning potentsial daromadingizni quyida hisoblang.", 
+                question1Title: 'Siz qanday turdagi haydovchisiz?', 
+                leaseButton: 'Lease Operator', 
+                companyButton: 'Company Driver', 
+                ownerButton: 'Owner Operator', 
+                question2Title: 'Haftasiga necha mil haydaysiz?', 
+                milesPlaceholder: 'masalan, 2500', 
+                calculateButton: 'Hisoblash', 
+                resultTitle: 'Sizning Potentsial Daromadingiz', 
+                resultMsgHigh: '&#127942; Ajoyib natija! Siz eng yuqori daromad oluvchilar qatoridasiz.', 
+                resultMsgMid: '&#x2728; Ajoyib natija! Bu kuchli, raqobatbardosh daromad.', 
+                resultMsgLow: '&#x1F4C8; O\'sish uchun yaxshi potentsialga ega ajoyib boshlanish.', 
+                seeCalculationLink: 'Qanday hisoblaganimizni ko\'ring', 
+                applyNowButton: 'BIZ BILAN ISHLANG', 
+                shareButton: 'Hisob-kitobni Ulashish', 
+                newCalculationButton: 'Yangi Hisob-kitob', 
+                applyTitle: 'Murojaat Qiling', 
+                applySubtitle: 'Bir qadam qoldi! Ma\'lumotlaringizni to\'ldiring.', 
+                fullNamePlaceholder: 'To\'liq ism', 
+                phonePlaceholder: 'Telefon raqami', 
+                emailPlaceholder: 'Elektron pochta', 
+                submitApplicationButton: 'Arizani Yuborish', 
+                thanksTitle: 'Rahmat!', 
+                thanksSubtitle: 'Arizangiz yuborildi. Tez orada siz bilan bog\'lanamiz.', 
+                startOverButton: 'Boshidan Boshlash', 
+                breakdownTitle: 'Hisob-kitob Tafsilotlari', 
+                copyright: '&copy; 2025 Ray Star LLC. Barcha huquqlar himoyalangan.', 
+                contactUs: 'Biz bilan bog\'laning', 
+                companyDriverTitle: 'Kompaniya haydovchisining ish haqi',
+                progressStep1: 'Haydovchining Turi', 
+                progressStep2: 'Haftalik Millar', 
+                progressStep3: 'Sizning Natijangiz',
+                calcGrossIncome: '1. Yalpi daromad', 
+                calcMilesDriven: '{miles} mil', 
+                calcPerMile: '× ${rate}/mil uchun', 
+                calcExpenses: '2. Taxminiy xarajatlar', 
+                calcFixedCosts: 'Doimiy xarajatlar:', 
+                calcVariableCosts: 'O\'zgaruvchan xarajatlar ({miles} mil uchun):', 
+                calcTotalExpenses: 'Jami taxminiy xarajatlar', 
+                calcTakeHome: '3. Potentsial daromad', 
+                calcIncome: 'Daromad', 
+                calcMinusExpenses: 'Xarajatlar'
             }
         };
         
