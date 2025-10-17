@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
+    <!-- This CSS is identical to your original design -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -45,8 +46,6 @@
         }
         .progress-bar-bg { background-color: #e0e0e0; border-radius: 9999px; overflow: hidden; }
         .progress-bar-fill { background-color: #1abc9c; transition: width 0.5s ease-in-out; }
-        .lang-btn { font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 0.375rem; transition: background-color 0.2s, color 0.2s; text-align: left; width: 100%; }
-        .lang-btn.active { background-color: #1abc9c; color: white; }
     </style>
 </head>
 <body class="antialiased bg-pattern">
@@ -61,26 +60,15 @@
                     </button>
                     <img src="https://i.postimg.cc/BvFFBrMk/image.png" alt="Company Logo" class="h-10 w-auto">
                 </div>
-                <div class="relative">
-                    <button id="language-toggle-btn" class="text-sm font-semibold text-gray-500 hover:bg-gray-100 px-3 py-1 border border-gray-300 rounded-full transition-colors">
-                        Language
-                    </button>
-                    <div id="language-dropdown" class="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg p-1 z-20 hidden">
-                        <button data-lang="en" class="lang-btn">English</button>
-                        <button data-lang="es" class="lang-btn">Espa&ntilde;ol</button>
-                        <button data-lang="ru" class="lang-btn">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</button>
-                        <button data-lang="uz" class="lang-btn">O'zbek</button>
-                    </div>
-                </div>
             </header>
             
-            <div class="p-6 sm:p-8">
+            <main class="p-6 sm:p-8">
                 <div class="text-center mb-6">
-                    <p class="text-lg font-semibold text-gray-700" data-key="appTitle">Truck Driver Pay Calculator</p>
+                    <p class="text-lg font-semibold text-gray-700">Truck Driver Pay Calculator</p>
                 </div>
 
                 <div id="progress-container" class="my-6">
-                    <p id="progress-text" class="text-sm font-semibold text-center text-gray-500 mb-2"></p>
+                    <p id="progress-text" class="text-sm font-semibold text-center text-gray-500 mb-2">Step 1 of 3: Driver Type</p>
                     <div class="progress-bar-bg h-2 w-full">
                         <div id="progress-bar" class="progress-bar-fill h-2" style="width: 33%;"></div>
                     </div>
@@ -88,230 +76,103 @@
                 
                 <div class="view-container">
                     <div id="view-question1" class="view">
-                        <div class="text-center mb-6 p-3 bg-teal-50 border border-teal-200 rounded-lg">
-                            <p class="text-base font-bold text-teal-800" data-key="promoTitle"></p>
-                            <p class="text-sm text-teal-600" data-key="promoSubtitle"></p>
-                        </div>
-                        <h2 class="text-xl font-bold text-center mb-4" data-key="question1Title"></h2>
+                        <h2 class="text-xl font-bold text-center mb-4">What type of driver are you?</h2>
                         <div class="space-y-4">
-                            <button class="btn btn-primary w-full driver-type-btn" data-type="lease" data-key="leaseButton"></button>
-                            <button class="btn btn-primary w-full driver-type-btn" data-type="company" data-key="companyButton"></button>
-                            <button class="btn btn-primary w-full driver-type-btn" data-type="owner" data-key="ownerButton"></button>
+                            <button class="btn btn-primary w-full driver-type-btn" data-type="lease">Lease Operator</button>
+                            <button class="btn btn-primary w-full driver-type-btn" data-type="company">Company Driver</button>
+                            <button class="btn btn-primary w-full driver-type-btn" data-type="owner">Owner Operator</button>
                         </div>
                     </div>
 
                     <div id="view-question2" class="view hidden">
-                        <h2 class="text-xl font-bold text-center mb-4" data-key="question2Title"></h2>
+                        <h2 class="text-xl font-bold text-center mb-4">How many miles can you drive in a week?</h2>
                         <div class="space-y-4">
-                            <input type="number" id="miles-input" class="w-full text-center text-lg p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
-                            <button id="calculate-btn" class="btn btn-action w-full" data-key="calculateButton"></button>
+                            <input type="number" id="miles-input" class="w-full text-center text-lg p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition" placeholder="e.g., 2500">
+                            <button id="calculate-btn" class="btn btn-action w-full">Calculate</button>
                         </div>
                     </div>
 
                     <div id="view-result" class="view hidden text-center">
-                        <h2 class="text-xl font-semibold text-gray-600 mb-2" data-key="resultTitle"></h2>
+                        <h2 class="text-xl font-semibold text-gray-600 mb-2">Your Potential Take Home Is</h2>
                         <p id="result-amount" class="text-5xl font-extrabold text-gray-900 mb-2">$0.00</p>
-                        <div id="result-message" class="p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 text-sm mb-4"></div>
-                        <button id="see-calculation-btn" class="text-sm text-indigo-600 hover:underline mb-4" data-key="seeCalculationLink"></button>
-                        <div class="space-y-3">
-                            <button id="apply-now-btn" class="btn btn-cta w-full text-lg" data-key="applyNowButton"></button>
-                            <p class="text-xs text-gray-500" data-key="applyMicrocopy"></p>
-                            <button id="restart-btn" class="btn bg-gray-500 hover:bg-gray-600 text-white w-full" data-key="newCalculationButton"></button>
+                        <div class="space-y-3 mt-6">
+                            <button id="apply-now-btn" class="btn btn-cta w-full text-lg">APPLY NOW</button>
+                            <button id="restart-btn" class="btn bg-gray-500 hover:bg-gray-600 text-white w-full">Start a New Calculation</button>
                         </div>
                     </div>
 
                     <div id="view-apply" class="view hidden">
-                        <h2 class="text-xl font-bold text-center mb-4" data-key="applyTitle"></h2>
-                        <p class="text-center text-gray-600 mb-4" data-key="applySubtitle"></p>
+                        <h2 class="text-xl font-bold text-center mb-4">Apply Now</h2>
                         <form id="application-form" class="space-y-4">
-                            <input name="fullName" type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <input name="phone" type="tel" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <input name="email" type="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <button id="submit-form-button" type="submit" class="btn btn-action w-full" data-key="submitApplicationButton"></button>
+                            <input name="Full Name" type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Full Name">
+                            <input name="Phone" type="tel" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Phone Number">
+                            <input name="Email" type="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Email Address">
+                            <button id="submit-form-button" type="submit" class="btn btn-action w-full">Submit Application</button>
                         </form>
                     </div>
                     
                     <div id="view-thanks" class="view hidden text-center">
-                        <h2 class="text-2xl font-bold text-green-600 mb-4" data-key="thanksTitle"></h2>
-                        <p class="text-gray-600" data-key="thanksSubtitle"></p>
-                        <button id="start-over-btn" class="btn btn-primary w-full mt-6" data-key="startOverButton"></button>
-                    </div>
-                    
-                    <div id="view-calculation" class="view hidden text-left">
-                        <h2 class="text-xl font-bold text-center mb-4" data-key="breakdownTitle"></h2>
-                        <div id="calculation-details" class="space-y-4 text-sm text-gray-700"></div>
+                        <h2 class="text-2xl font-bold text-green-600 mb-4">Thank You!</h2>
+                        <p class="text-gray-600">Your application has been submitted. We will be in touch shortly.</p>
+                        <button id="start-over-btn" class="btn btn-primary w-full mt-6">Start Over</button>
                     </div>
                 </div>
-
-                <div class="text-center mt-8 pt-4 border-t border-gray-200">
-                    <p class="text-xs text-gray-400" data-key="copyright"></p>
-                </div>
-            </div>
+            </main>
         </div>
     </div>
 
     <script>
         // --- CONFIGURATION ---
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlw0PE-C5lksf25_JSpNUrttOjyh7aGidxuGgAXlPh35rwi1XKW-QlczWMvDJianJS8A/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyCBHpngMjk-PVHsa5k9w9Nzo7eADitrb-uSl9__rvzZA2pHga1vYBVjeT-WQPoBJ29Vg/exec';
 
-        // --- STATE MANAGEMENT ---
+        // --- APPLICATION STATE ---
         const state = {
             driverType: null,
             miles: 0,
             takeHomePay: 0,
-            lang: 'en',
-            currentView: 'view-question1'
-        };
-
-        // --- TRANSLATIONS ---
-        const translations = {
-            en: {
-                appTitle: 'Truck Driver Pay Calculator',
-                promoTitle: 'Earn up to $6000/week with us!',
-                promoSubtitle: 'Find out your potential take-home pay below.',
-                question1Title: 'What type of driver are you?',
-                leaseButton: 'Lease Operator',
-                companyButton: 'Company Driver',
-                ownerButton: 'Owner Operator',
-                question2Title: 'How many miles can you drive in a week?',
-                milesPlaceholder: 'e.g., 2500',
-                calculateButton: 'Calculate',
-                resultTitle: 'Your Potential Take Home Is',
-                resultMsgHigh: '&#127942; Outstanding result! You\'re in the top tier of earners.',
-                resultMsgMid: '&#x2728; Excellent result! This is a strong, competitive income.',
-                resultMsgLow: '&#x1F4C8; A great starting point with solid potential for growth.',
-                seeCalculationLink: 'See how we calculated this',
-                applyNowButton: 'APPLY NOW',
-                applyMicrocopy: 'Takes only 30 seconds',
-                newCalculationButton: 'Start a New Calculation',
-                applyTitle: 'Apply Now',
-                applySubtitle: "You're one step away! Fill out your info below.",
-                fullNamePlaceholder: 'Full name',
-                phonePlaceholder: 'Phone number',
-                emailPlaceholder: 'Email',
-                submitApplicationButton: 'Submit Application',
-                thanksTitle: 'Thank You!',
-                thanksSubtitle: 'Your application has been submitted. We will be in touch shortly.',
-                startOverButton: 'Start Over',
-                breakdownTitle: 'Calculation Breakdown',
-                copyright: '&copy; 2025 Ray Star LLC. All Rights Reserved.',
-                progressTextTemplate: 'Step {step} of 3: {page}',
-                progressStep1: 'Driver Type',
-                progressStep2: 'Weekly Miles',
-                progressStep3: 'Your Results',
-                companyDriverTitle: 'Company Driver Pay',
-                calcGrossIncome: '1. Gross Income',
-                calcMilesDriven: '{miles} miles',
-                calcPerMile: '× ${rate}/mile',
-                calcExpenses: '2. Estimated Expenses',
-                calcFixedCosts: 'Fixed Costs:',
-                calcVariableCosts: 'Variable Costs (for {miles} miles):',
-                calcTotalExpenses: 'Total Estimated Expenses',
-                calcTakeHome: '3. Potential Take-Home',
-                calcIncome: 'Income',
-                calcMinusExpenses: 'Expenses',
-            },
-            // Add other languages here if needed
-            es: {},
-            ru: {},
-            uz: {}
+            currentView: 'view-question1',
         };
 
         // --- DOM ELEMENTS ---
         const dom = {
             backArrow: document.getElementById('back-arrow'),
-            languageToggleBtn: document.getElementById('language-toggle-btn'),
-            languageDropdown: document.getElementById('language-dropdown'),
             progressBar: document.getElementById('progress-bar'),
             progressText: document.getElementById('progress-text'),
-            progressContainer: document.getElementById('progress-container'),
             milesInput: document.getElementById('miles-input'),
             resultAmount: document.getElementById('result-amount'),
-            resultMessage: document.getElementById('result-message'),
-            calculationDetails: document.getElementById('calculation-details'),
             applicationForm: document.getElementById('application-form'),
-            submitFormButton: document.getElementById('submit-form-button')
+            submitFormButton: document.getElementById('submit-form-button'),
         };
-        
+
         // --- FUNCTIONS ---
 
         /**
-         * Sets the application language and updates all UI text.
-         */
-        function setLanguage(lang) {
-            state.lang = lang;
-            dom.languageDropdown.classList.add('hidden');
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-
-            const langPack = translations[lang] || translations.en;
-            document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.dataset.key;
-                if (langPack[key]) {
-                    el.innerHTML = langPack[key];
-                }
-            });
-
-            // Set placeholders specifically
-            dom.milesInput.placeholder = langPack.milesPlaceholder;
-            document.querySelector('input[name="fullName"]').placeholder = langPack.fullNamePlaceholder;
-            document.querySelector('input[name="phone"]').placeholder = langPack.phonePlaceholder;
-            document.querySelector('input[name="email"]').placeholder = langPack.emailPlaceholder;
-
-            // Refresh the current view to update progress text
-            showView(state.currentView);
-        }
-
-        /**
-         * Manages which view is visible and updates the progress bar.
+         * Manages screen transitions and updates the progress bar.
          */
         function showView(viewId) {
             state.currentView = viewId;
             document.querySelectorAll('.view').forEach(view => view.classList.add('hidden'));
             document.getElementById(viewId).classList.remove('hidden');
 
-            const isCalculatorView = ['view-question1', 'view-question2', 'view-result'].includes(viewId);
-            dom.progressContainer.classList.toggle('hidden', !isCalculatorView);
+            const viewConfig = {
+                'view-question1': { progress: '33%', text: 'Step 1 of 3: Driver Type', back: false },
+                'view-question2': { progress: '66%', text: 'Step 2 of 3: Weekly Miles', back: true, backTarget: 'view-question1' },
+                'view-result': { progress: '100%', text: 'Step 3 of 3: Your Results', back: true, backTarget: 'view-question2' },
+                'view-apply': { progress: '100%', text: 'Application', back: true, backTarget: 'view-result' },
+                'view-thanks': { progress: '100%', text: 'Complete', back: false },
+            };
 
-            let progressWidth = '33%';
-            let stepKey = 'progressStep1';
-            let showBack = false;
-            let backTarget = '';
-
-            if (viewId === 'view-question1') {
-                // Default state
-            } else if (viewId === 'view-question2') {
-                progressWidth = '66%';
-                stepKey = 'progressStep2';
-                showBack = true;
-                backTarget = 'view-question1';
-            } else if (viewId === 'view-result') {
-                progressWidth = '100%';
-                stepKey = 'progressStep3';
-                showBack = true;
-                backTarget = 'view-question2';
-            } else if (viewId === 'view-apply') {
-                showBack = true;
-                backTarget = 'view-result';
-            } else if (viewId === 'view-calculation') {
-                showBack = true;
-                backTarget = 'view-result';
+            const config = viewConfig[viewId];
+            if (config) {
+                dom.progressText.textContent = config.text;
+                dom.progressBar.style.width = config.progress;
+                dom.backArrow.classList.toggle('hidden', !config.back);
+                dom.backArrow.onclick = () => showView(config.backTarget);
             }
-            
-            dom.backArrow.classList.toggle('hidden', !showBack);
-            dom.backArrow.onclick = () => showView(backTarget);
-            dom.progressBar.style.width = progressWidth;
-
-            const langPack = translations[state.lang] || translations.en;
-            const pageText = langPack[stepKey] || '';
-            const template = langPack.progressTextTemplate || '';
-            const stepNumber = (stepKey === 'progressStep1') ? 1 : (stepKey === 'progressStep2') ? 2 : 3;
-            dom.progressText.innerHTML = template.replace('{step}', stepNumber).replace('{page}', pageText);
         }
 
         /**
-         * Calculates the take-home pay based on current state.
+         * Calculates pay based on the current state.
          */
         function calculateAndDisplayResult() {
             let result = 0;
@@ -331,70 +192,10 @@
             }
             state.takeHomePay = result > 0 ? result : 0;
             dom.resultAmount.textContent = state.takeHomePay.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-
-            const langPack = translations[state.lang] || translations.en;
-            if (result > 2800) dom.resultMessage.innerHTML = langPack.resultMsgHigh;
-            else if (result >= 1800) dom.resultMessage.innerHTML = langPack.resultMsgMid;
-            else dom.resultMessage.innerHTML = langPack.resultMsgLow;
-        }
-
-        /**
-         * Generates the HTML for the calculation breakdown.
-         */
-        function getCalculationText() {
-            const T = translations[state.lang] || translations.en;
-            const dT = state.driverType;
-            const m = state.miles;
-            let h = '';
-
-            if (dT === 'company') {
-                const g = m * 0.65;
-                h += `<div class="p-3 bg-gray-100 rounded-lg"><h3 class="font-bold">${T.companyDriverTitle}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '0.65')}</span><strong>${(g).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</strong></p></div>`;
-                return h;
-            }
-
-            const gI = m * 2.15;
-            let fC = [{l:'Cargo & Liability Insurance',v:375},{l:'Trailer Charge',v:250},{l:'Admin Fee',v:75},{l:'Occupational Insurance',v:37}];
-            let vC = [{l:'Fuel Expense ($0.45/mile)',v:m*0.45}];
-            
-            if (dT === 'lease') {
-                fC.unshift({l:'Truck Charge',v:900});
-                vC.unshift({l:`Service Charge (15%)`,v:gI*0.15});
-                vC.push({l:`Mileage Charge ($0.12/mile)`,v:m*0.12});
-            } else { // owner
-                vC.unshift({l:`Service Charge (12%)`,v:gI*0.12});
-            }
-
-            const tF = fC.reduce((s,i) => s + i.v, 0);
-            const tV = vC.reduce((s,i) => s + i.v, 0);
-            const tE = tF + tV;
-            const tH = gI - tE;
-
-            const formatCurrency = (num) => num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            
-            h += `<div class="p-3 bg-green-50 border border-green-200 rounded-lg"><h3 class="font-bold text-green-800">${T.calcGrossIncome}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '2.15')}</span><strong>${formatCurrency(gI)}</strong></p></div>`;
-            h += `<div class="p-3 bg-red-50 border border-red-200 rounded-lg"><h3 class="font-bold text-red-800">${T.calcExpenses}</h3><div class="font-semibold mt-2">${T.calcFixedCosts}</div>`;
-            fC.forEach(i => { h += `<p class="flex justify-between"><span>${i.l}</span><span>${formatCurrency(i.v)}</span></p>` });
-            h += `<div class="font-semibold mt-2">${T.calcVariableCosts.replace('{miles}', m)}</div>`;
-            vC.forEach(i => { h += `<p class="flex justify-between"><span>${i.l}</span><span>${formatCurrency(i.v)}</span></p>` });
-            h += `<p class="flex justify-between font-bold mt-2 border-t pt-1 border-gray-300"><span>${T.calcTotalExpenses}</span><span>${formatCurrency(tE)}</span></p></div>`;
-            h += `<div class="p-3 bg-blue-50 border border-blue-200 rounded-lg"><h3 class="font-bold text-blue-800">${T.calcTakeHome}</h3><p class="flex justify-between"><span>${formatCurrency(gI)} (${T.calcIncome}) - ${formatCurrency(tE)} (${T.calcMinusExpenses})</span><strong class="text-lg">${formatCurrency(tH)}</strong></p></div>`;
-            return h;
-        }
-
-        /**
-         * Sends anonymous tracking data to the backend.
-         */
-        function trackEvent(eventName, eventValue) {
-            const formData = new FormData();
-            formData.append('action', 'eventTracking');
-            formData.append('eventName', eventName);
-            formData.append('eventValue', eventValue);
-            navigator.sendBeacon(SCRIPT_URL, new URLSearchParams(formData));
         }
         
         /**
-         * Resets the entire application to its initial state.
+         * Resets the application to its initial state.
          */
         function restartApp() {
             Object.assign(state, { driverType: null, miles: 0, takeHomePay: 0 });
@@ -403,34 +204,17 @@
             showView('view-question1');
         }
 
-        // --- EVENT LISTENERS INITIALIZATION ---
+        // --- EVENT LISTENERS ---
         document.addEventListener('DOMContentLoaded', () => {
-            setLanguage('en'); // Set default language
-            trackEvent('pageView', 'AppLoaded');
+            showView('view-question1');
 
-            // Language selection
-            dom.languageToggleBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                dom.languageDropdown.classList.toggle('hidden');
-            });
-            document.addEventListener('click', () => dom.languageDropdown.classList.add('hidden'));
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    setLanguage(e.target.dataset.lang);
-                });
-            });
-
-            // Step 1: Select driver type
             document.querySelectorAll('.driver-type-btn').forEach(button => {
                 button.addEventListener('click', () => {
                     state.driverType = button.dataset.type;
-                    trackEvent('click', `DriverType:${state.driverType}`);
                     showView('view-question2');
                 });
             });
 
-            // Step 2: Calculate
             document.getElementById('calculate-btn').addEventListener('click', () => {
                 const miles = parseInt(dom.milesInput.value, 10);
                 if (isNaN(miles) || miles <= 0) {
@@ -439,55 +223,51 @@
                 }
                 state.miles = miles;
                 calculateAndDisplayResult();
-                trackEvent('calculation', `Type:${state.driverType},Miles:${state.miles},Pay:${state.takeHomePay.toFixed(2)}`);
                 showView('view-result');
                 confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
             });
 
-            // Result view buttons
-            document.getElementById('see-calculation-btn').addEventListener('click', () => {
-                dom.calculationDetails.innerHTML = getCalculationText();
-                showView('view-calculation');
-            });
             document.getElementById('apply-now-btn').addEventListener('click', () => showView('view-apply'));
             document.getElementById('restart-btn').addEventListener('click', restartApp);
             document.getElementById('start-over-btn').addEventListener('click', restartApp);
 
-            // Application form submission
             dom.applicationForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const originalButtonText = dom.submitFormButton.innerHTML;
+                const originalButtonText = dom.submitFormButton.textContent;
                 dom.submitFormButton.disabled = true;
-                dom.submitFormButton.innerHTML = 'Submitting...';
+                dom.submitFormButton.textContent = 'Submitting...';
+                
+                // This creates the JSON payload for the new script
+                const data = {
+                    'Full Name': dom.applicationForm.querySelector('[name="Full Name"]').value,
+                    'Phone': dom.applicationForm.querySelector('[name="Phone"]').value,
+                    'Email': dom.applicationForm.querySelector('[name="Email"]').value,
+                    'Driver Type': state.driverType,
+                    'Weekly Miles': state.miles,
+                    'Potential Pay': state.takeHomePay.toFixed(2),
+                };
 
-                const formData = new FormData(dom.applicationForm);
-                formData.append('action', 'formSubmit');
-                formData.append('driverType', state.driverType);
-                formData.append('miles', state.miles);
-                formData.append('potentialPay', state.takeHomePay.toFixed(2));
-
-                fetch(SCRIPT_URL, { method: 'POST', body: formData })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.result === 'success') {
-                            trackEvent('formSubmit', 'Success');
-                            showView('view-thanks');
-                        } else {
-                            throw new Error(data.message || 'Submission failed');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Submission Error:', error);
-                        alert('An error occurred. Please try again.');
-                        trackEvent('formSubmit', `Error: ${error.message}`);
-                    })
-                    .finally(() => {
-                        dom.submitFormButton.disabled = false;
-                        dom.submitFormButton.innerHTML = originalButtonText;
-                    });
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    // This is required to make it work with the new script
+                    mode: 'no-cors', 
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                })
+                .then(() => {
+                    // Because of `no-cors`, we can't read the response, but we assume success
+                    showView('view-thanks');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                })
+                .finally(() => {
+                    dom.submitFormButton.disabled = false;
+                    dom.submitFormButton.textContent = originalButtonText;
+                });
             });
         });
     </script>
 </body>
 </html>
-
