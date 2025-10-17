@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
     <style>
         body {
@@ -66,10 +66,10 @@
                         Language
                     </button>
                     <div id="language-dropdown" class="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg p-1 z-20 hidden">
-                        <button id="lang-en" onclick="setLanguage('en')" class="lang-btn">English</button>
-                        <button id="lang-es" onclick="setLanguage('es')" class="lang-btn">Espa&ntilde;ol</button>
-                        <button id="lang-ru" onclick="setLanguage('ru')" class="lang-btn">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</button>
-                        <button id="lang-uz" onclick="setLanguage('uz')" class="lang-btn">O'zbek</button>
+                        <button data-lang="en" class="lang-btn">English</button>
+                        <button data-lang="es" class="lang-btn">Espa&ntilde;ol</button>
+                        <button data-lang="ru" class="lang-btn">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</button>
+                        <button data-lang="uz" class="lang-btn">O'zbek</button>
                     </div>
                 </div>
             </header>
@@ -80,7 +80,7 @@
                 </div>
 
                 <div id="progress-container" class="my-6">
-                    <p id="progress-text" class="text-sm font-semibold text-center text-gray-500 mb-2" data-key="progressText">Step 1 of 3: Driver Type</p>
+                    <p id="progress-text" class="text-sm font-semibold text-center text-gray-500 mb-2"></p>
                     <div class="progress-bar-bg h-2 w-full">
                         <div id="progress-bar" class="progress-bar-fill h-2" style="width: 33%;"></div>
                     </div>
@@ -89,259 +89,405 @@
                 <div class="view-container">
                     <div id="view-question1" class="view">
                         <div class="text-center mb-6 p-3 bg-teal-50 border border-teal-200 rounded-lg">
-                            <p class="text-base font-bold text-teal-800" data-key="promoTitle">Earn up to $6000/week with us!</p>
-                            <p class="text-sm text-teal-600" data-key="promoSubtitle">Find out your potential take-home pay below.</p>
+                            <p class="text-base font-bold text-teal-800" data-key="promoTitle"></p>
+                            <p class="text-sm text-teal-600" data-key="promoSubtitle"></p>
                         </div>
-                        <h2 class="text-xl font-bold text-center mb-4" data-key="question1Title">What type of driver are you?</h2>
+                        <h2 class="text-xl font-bold text-center mb-4" data-key="question1Title"></h2>
                         <div class="space-y-4">
-                            <button onclick="trackClickEvent('Selected Lease Operator'); selectDriverType('lease');" class="btn btn-primary w-full" data-key="leaseButton">Lease Operator</button>
-                            <button onclick="trackClickEvent('Selected Company Driver'); selectDriverType('company');" class="btn btn-primary w-full" data-key="companyButton">Company Driver</button>
-                            <button onclick="trackClickEvent('Selected Owner Operator'); selectDriverType('owner');" class="btn btn-primary w-full" data-key="ownerButton">Owner Operator</button>
+                            <button class="btn btn-primary w-full driver-type-btn" data-type="lease" data-key="leaseButton"></button>
+                            <button class="btn btn-primary w-full driver-type-btn" data-type="company" data-key="companyButton"></button>
+                            <button class="btn btn-primary w-full driver-type-btn" data-type="owner" data-key="ownerButton"></button>
                         </div>
                     </div>
 
                     <div id="view-question2" class="view hidden">
-                        <h2 class="text-xl font-bold text-center mb-4" data-key="question2Title">How many miles can you drive in a week?</h2>
+                        <h2 class="text-xl font-bold text-center mb-4" data-key="question2Title"></h2>
                         <div class="space-y-4">
                             <input type="number" id="miles-input" class="w-full text-center text-lg p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
-                            <button onclick="submitMiles();" class="btn btn-action w-full" data-key="calculateButton">Calculate</button>
+                            <button id="calculate-btn" class="btn btn-action w-full" data-key="calculateButton"></button>
                         </div>
                     </div>
 
                     <div id="view-result" class="view hidden text-center">
-                        <h2 class="text-xl font-semibold text-gray-600 mb-2" data-key="resultTitle">Your Potential Take Home Is</h2>
+                        <h2 class="text-xl font-semibold text-gray-600 mb-2" data-key="resultTitle"></h2>
                         <p id="result-amount" class="text-5xl font-extrabold text-gray-900 mb-2">$0.00</p>
                         <div id="result-message" class="p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 text-sm mb-4"></div>
-                        <button onclick="trackClickEvent('Clicked See Calculation'); showCalculation();" class="text-sm text-indigo-600 hover:underline mb-4" data-key="seeCalculationLink">See how we calculated this</button>
+                        <button id="see-calculation-btn" class="text-sm text-indigo-600 hover:underline mb-4" data-key="seeCalculationLink"></button>
                         <div class="space-y-3">
-                            <button onclick="trackClickEvent('Clicked APPLY NOW'); showView('view-apply');" class="btn btn-cta w-full text-lg" data-key="applyNowButton">APPLY NOW</button>
-                            <p class="text-xs text-gray-500" data-key="applyMicrocopy">Takes only 30 seconds</p>
-                            <button onclick="trackClickEvent('Clicked Share Estimate'); shareResult();" class="btn bg-gray-200 hover:bg-gray-300 text-gray-800 w-full flex items-center justify-center space-x-2">
-                               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path></svg>
-                                <span data-key="shareButton">Share Estimate</span>
-                            </button>
-                            <button onclick="trackClickEvent('Clicked New Calculation'); restart();" class="btn bg-gray-500 hover:bg-gray-600 text-white w-full" data-key="newCalculationButton">Start a New Calculation</button>
-                        </div>
-                        <div class="mt-8 pt-4 border-t border-gray-200">
-                            <p class="text-lg font-semibold text-gray-700 mb-4" data-key="contactUs">Contact Us</p>
-                            <div class="mb-4">
-                                <div class="flex justify-center items-center space-x-6">
-                                    <a href="tel:+18474079858" onclick="trackClickEvent('Clicked Phone Icon');" class="text-gray-400 hover:text-green-600 transition-colors" title="Call Us">
-                                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                                    </a>
-                                    <a href="https://t.me/tomr_robins0n" target="_blank" rel="noopener noreferrer" onclick="trackClickEvent('Clicked Telegram Icon');" class="text-gray-400 hover:text-sky-600 transition-colors" title="Telegram">
-                                        <img src="https://telegram.org/img/t_logo.png" alt="Telegram Logo" class="w-7 h-7">
-                                    </a>
-                                </div>
-                                <a href="mailto:hr@raystarllc.com" onclick="trackClickEvent('Clicked Email Text');" class="block mt-3 text-gray-500 hover:text-indigo-600 transition-colors text-sm font-medium">hr@raystarllc.com</a>
-                            </div>
+                            <button id="apply-now-btn" class="btn btn-cta w-full text-lg" data-key="applyNowButton"></button>
+                            <p class="text-xs text-gray-500" data-key="applyMicrocopy"></p>
+                            <button id="restart-btn" class="btn bg-gray-500 hover:bg-gray-600 text-white w-full" data-key="newCalculationButton"></button>
                         </div>
                     </div>
 
                     <div id="view-apply" class="view hidden">
-                        <h2 class="text-xl font-bold text-center mb-4" data-key="applyTitle">Apply Now</h2>
-                        <p class="text-center text-gray-600 mb-4" data-key="applySubtitle">You're one step away! Fill out your info below.</p>
+                        <h2 class="text-xl font-bold text-center mb-4" data-key="applyTitle"></h2>
+                        <p class="text-center text-gray-600 mb-4" data-key="applySubtitle"></p>
                         <form id="application-form" class="space-y-4">
                             <input name="fullName" type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
                             <input name="phone" type="tel" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
                             <input name="email" type="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <div class="text-center mt-2">
-                                <button type="button" onclick="trackClickEvent('Clicked Privacy Link'); showView('view-privacy');" class="text-xs text-gray-500 hover:underline" data-key="privacyLink">Learn how we use your personal data</button>
-                            </div>
-                            <button id="submit-form-button" type="submit" class="btn btn-action w-full" data-key="submitApplicationButton">Submit Application</button>
+                            <button id="submit-form-button" type="submit" class="btn btn-action w-full" data-key="submitApplicationButton"></button>
                         </form>
                     </div>
                     
                     <div id="view-thanks" class="view hidden text-center">
-                        <h2 class="text-2xl font-bold text-green-600 mb-4" data-key="thanksTitle">Thank You!</h2>
-                        <p class="text-gray-600" data-key="thanksSubtitle">Your application has been submitted. We will be in touch shortly.</p>
-                        <button onclick="trackClickEvent('Clicked Start Over'); restart();" class="btn btn-primary w-full mt-6" data-key="startOverButton">Start Over</button>
+                        <h2 class="text-2xl font-bold text-green-600 mb-4" data-key="thanksTitle"></h2>
+                        <p class="text-gray-600" data-key="thanksSubtitle"></p>
+                        <button id="start-over-btn" class="btn btn-primary w-full mt-6" data-key="startOverButton"></button>
                     </div>
                     
                     <div id="view-calculation" class="view hidden text-left">
-                        <h2 class="text-xl font-bold text-center mb-4" data-key="breakdownTitle">Calculation Breakdown</h2>
+                        <h2 class="text-xl font-bold text-center mb-4" data-key="breakdownTitle"></h2>
                         <div id="calculation-details" class="space-y-4 text-sm text-gray-700"></div>
-                    </div>
-
-                    <div id="view-privacy" class="view hidden text-left">
-                        <h2 class="text-xl font-bold text-center mb-4" data-key="privacyTitle">Your Privacy Matters</h2>
-                        <div class="space-y-3 text-sm text-gray-700 bg-gray-50 p-4 rounded-lg border">
-                            <p data-key="privacyPara1">At Ray Star LLC...</p>
-                            <h3 class="font-semibold text-gray-800 pt-2" data-key="privacyPromiseTitle">Our Promise to You:</h3>
-                            <ul class="list-disc list-inside space-y-2">
-                                <li data-key="privacyPromise1"><strong>We will not sell your data.</strong>...</li>
-                                <li data-key="privacyPromise2"><strong>We will not spam you.</strong>...</li>
-                                <li data-key="privacyPromise3"><strong>Your data is secure.</strong>...</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
 
                 <div class="text-center mt-8 pt-4 border-t border-gray-200">
-                    <p class="text-xs text-gray-400" data-key="copyright">&copy; 2025 Ray Star LLC. All Rights Reserved.</p>
+                    <p class="text-xs text-gray-400" data-key="copyright"></p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // <-- YOUR URL HAS BEEN PLACED HERE
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzlw0PE-C5lksf25_JSpNUrttOjyh7aGidxuGgAXlPh35rwi1XKW-QlczWMvDJianJS8A/exec';
-        
+        // --- CONFIGURATION ---
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlw0PE-C5lksf25_JSpNUrttOjyh7aGidxuGgAXlPh35rwi1XKW-QlczWMvDJianJS8A/exec';
+
+        // --- STATE MANAGEMENT ---
+        const state = {
+            driverType: null,
+            miles: 0,
+            takeHomePay: 0,
+            lang: 'en',
+            currentView: 'view-question1'
+        };
+
+        // --- TRANSLATIONS ---
         const translations = {
             en: {
-                promoTitle: 'Earn up to $6000/week with us!', appTitle: 'Truck Driver Pay Calculator', progressText: 'Step {step} of 3: {page}', promoSubtitle: 'Find out your potential take-home pay below.', question1Title: 'What type of driver are you?', leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator', question2Title: 'How many miles can you drive in a week?', milesPlaceholder: 'e.g., 2500', calculateButton: 'Calculate', resultTitle: 'Your Potential Take Home Is', resultMsgHigh: '&#127942; Outstanding result! You\'re in the top tier of earners.', resultMsgMid: '&#x2728; Excellent result! This is a strong, competitive income.', resultMsgLow: '&#x1F4C8; A great starting point with solid potential for growth.', seeCalculationLink: 'See how we calculated this', applyNowButton: 'APPLY NOW', applyMicrocopy: 'Takes only 30 seconds', shareButton: 'Share Estimate', newCalculationButton: 'Start a New Calculation', applyTitle: 'Apply Now', applySubtitle: 'You\'re one step away! Fill out your info below.', fullNamePlaceholder: 'Full name', phonePlaceholder: 'Phone number', emailPlaceholder: 'Email', privacyLink: 'Learn how we use your personal data', submitApplicationButton: 'Submit Application', thanksTitle: 'Thank You!', thanksSubtitle: 'Your application has been submitted. We will be in touch shortly.', startOverButton: 'Start Over', breakdownTitle: 'Calculation Breakdown', privacyTitle: 'Your Privacy Matters', copyright: '&copy; 2025 Ray Star LLC. All Rights Reserved.', contactUs: 'Contact Us', calcGrossIncome: '1. Gross Income', calcMilesDriven: '{miles} miles', calcPerMile: '× ${rate}/mile', calcExpenses: '2. Estimated Expenses', calcFixedCosts: 'Fixed Costs:', calcVariableCosts: 'Variable Costs (for {miles} miles):', calcTotalExpenses: 'Total Estimated Expenses', calcTakeHome: '3. Potential Take-Home', calcIncome: 'Income', calcMinusExpenses: 'Expenses',
-                progressStep1: 'Driver Type', progressStep2: 'Weekly Miles', progressStep3: 'Your Results', companyDriverTitle: 'Company Driver Pay',
+                appTitle: 'Truck Driver Pay Calculator',
+                promoTitle: 'Earn up to $6000/week with us!',
+                promoSubtitle: 'Find out your potential take-home pay below.',
+                question1Title: 'What type of driver are you?',
+                leaseButton: 'Lease Operator',
+                companyButton: 'Company Driver',
+                ownerButton: 'Owner Operator',
+                question2Title: 'How many miles can you drive in a week?',
+                milesPlaceholder: 'e.g., 2500',
+                calculateButton: 'Calculate',
+                resultTitle: 'Your Potential Take Home Is',
+                resultMsgHigh: '&#127942; Outstanding result! You\'re in the top tier of earners.',
+                resultMsgMid: '&#x2728; Excellent result! This is a strong, competitive income.',
+                resultMsgLow: '&#x1F4C8; A great starting point with solid potential for growth.',
+                seeCalculationLink: 'See how we calculated this',
+                applyNowButton: 'APPLY NOW',
+                applyMicrocopy: 'Takes only 30 seconds',
+                newCalculationButton: 'Start a New Calculation',
+                applyTitle: 'Apply Now',
+                applySubtitle: "You're one step away! Fill out your info below.",
+                fullNamePlaceholder: 'Full name',
+                phonePlaceholder: 'Phone number',
+                emailPlaceholder: 'Email',
+                submitApplicationButton: 'Submit Application',
+                thanksTitle: 'Thank You!',
+                thanksSubtitle: 'Your application has been submitted. We will be in touch shortly.',
+                startOverButton: 'Start Over',
+                breakdownTitle: 'Calculation Breakdown',
+                copyright: '&copy; 2025 Ray Star LLC. All Rights Reserved.',
+                progressTextTemplate: 'Step {step} of 3: {page}',
+                progressStep1: 'Driver Type',
+                progressStep2: 'Weekly Miles',
+                progressStep3: 'Your Results',
+                companyDriverTitle: 'Company Driver Pay',
+                calcGrossIncome: '1. Gross Income',
+                calcMilesDriven: '{miles} miles',
+                calcPerMile: '× ${rate}/mile',
+                calcExpenses: '2. Estimated Expenses',
+                calcFixedCosts: 'Fixed Costs:',
+                calcVariableCosts: 'Variable Costs (for {miles} miles):',
+                calcTotalExpenses: 'Total Estimated Expenses',
+                calcTakeHome: '3. Potential Take-Home',
+                calcIncome: 'Income',
+                calcMinusExpenses: 'Expenses',
             },
-            es: { /* ... Spanish translations ... */ },
-            ru: { /* ... Russian translations ... */ },
-            uz: {
-                progressStep1: 'Haydovchining Turi', progressStep2: 'Haftalik Millar', progressStep3: 'Sizning Natijangiz'
-                /* ... other Uzbek translations ... */
-            }
+            // Add other languages here if needed
+            es: {},
+            ru: {},
+            uz: {}
+        };
+
+        // --- DOM ELEMENTS ---
+        const dom = {
+            backArrow: document.getElementById('back-arrow'),
+            languageToggleBtn: document.getElementById('language-toggle-btn'),
+            languageDropdown: document.getElementById('language-dropdown'),
+            progressBar: document.getElementById('progress-bar'),
+            progressText: document.getElementById('progress-text'),
+            progressContainer: document.getElementById('progress-container'),
+            milesInput: document.getElementById('miles-input'),
+            resultAmount: document.getElementById('result-amount'),
+            resultMessage: document.getElementById('result-message'),
+            calculationDetails: document.getElementById('calculation-details'),
+            applicationForm: document.getElementById('application-form'),
+            submitFormButton: document.getElementById('submit-form-button')
         };
         
-        const state = { driverType: null, miles: 0, takeHomePay: 0, lang: 'en' };
-        
-        const languageToggleBtn = document.getElementById('language-toggle-btn');
-        const languageDropdown = document.getElementById('language-dropdown');
-        const progressBar = document.getElementById('progress-bar');
-        const progressText = document.getElementById('progress-text');
-        const progressContainer = document.getElementById('progress-container');
-        const backArrow = document.getElementById('back-arrow');
-        const views = ['view-question1', 'view-question2', 'view-result', 'view-apply', 'view-thanks', 'view-calculation', 'view-privacy'];
-        const toCurrency = (num) => num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        
-        languageToggleBtn.addEventListener('click', (event) => {
-            event.stopPropagation();
-            languageDropdown.classList.toggle('hidden');
-        });
-        document.addEventListener('click', (event) => {
-            if (!languageToggleBtn.contains(event.target)) {
-                languageDropdown.classList.add('hidden');
-            }
-        });
+        // --- FUNCTIONS ---
 
+        /**
+         * Sets the application language and updates all UI text.
+         */
         function setLanguage(lang) {
-            languageDropdown.classList.add('hidden');
-            if (!translations[lang]) return;
             state.lang = lang;
-            localStorage.setItem('language', lang);
-            
-            try { window.history.pushState({}, '', `?lang=${lang}`); } catch (e) { console.warn("Could not update URL:", e); }
-
-            ['en', 'es', 'ru', 'uz'].forEach(id => {
-                document.getElementById(`lang-${id}`).classList.toggle('active', id === lang);
+            dom.languageDropdown.classList.add('hidden');
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
             });
 
+            const langPack = translations[lang] || translations.en;
             document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (translations[lang] && translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
+                const key = el.dataset.key;
+                if (langPack[key]) {
+                    el.innerHTML = langPack[key];
                 }
             });
 
-            const milesInput = document.getElementById('miles-input');
-            if(milesInput) milesInput.placeholder = (translations[lang] && translations[lang].milesPlaceholder) || 'e.g., 2500';
-            
-            const formInputs = {'fullName': 'fullNamePlaceholder', 'phone': 'phonePlaceholder', 'email': 'emailPlaceholder'};
-            Object.keys(formInputs).forEach(inputName => {
-                const inputEl = document.querySelector(`input[name="${inputName}"]`);
-                if(inputEl) inputEl.placeholder = (translations[lang] && translations[lang][formInputs[inputName]]) || '';
-            });
+            // Set placeholders specifically
+            dom.milesInput.placeholder = langPack.milesPlaceholder;
+            document.querySelector('input[name="fullName"]').placeholder = langPack.fullNamePlaceholder;
+            document.querySelector('input[name="phone"]').placeholder = langPack.phonePlaceholder;
+            document.querySelector('input[name="email"]').placeholder = langPack.emailPlaceholder;
 
-            const currentView = document.querySelector('.view:not(.hidden)');
-            if (currentView) showView(currentView.id); 
-            
-            if(state.driverType) { calculateResult(); }
+            // Refresh the current view to update progress text
+            showView(state.currentView);
         }
-        
-        function updateProgress(step, pageKey) {
-            const widthMap = { 1: '33%', 2: '66%', 3: '100%' };
-            progressBar.style.width = widthMap[step] || '33%';
-            
-            const progressEl = document.getElementById('progress-text');
-            let template = (translations[state.lang] && translations[state.lang].progressText) || 'Step {step} of 3: {page}';
-            let pageText = (translations[state.lang] && translations[state.lang][pageKey]) || '';
-            
-            progressEl.textContent = template.replace('{step}', step).replace('{page}', pageText);
-        }
-        
+
+        /**
+         * Manages which view is visible and updates the progress bar.
+         */
         function showView(viewId) {
-            views.forEach(id => { document.getElementById(id).classList.toggle('hidden', id !== viewId); });
-            const calculatorViews = ['view-question1', 'view-question2', 'view-result'];
-            progressContainer.classList.toggle('hidden', !calculatorViews.includes(viewId));
-            
+            state.currentView = viewId;
+            document.querySelectorAll('.view').forEach(view => view.classList.add('hidden'));
+            document.getElementById(viewId).classList.remove('hidden');
+
+            const isCalculatorView = ['view-question1', 'view-question2', 'view-result'].includes(viewId);
+            dom.progressContainer.classList.toggle('hidden', !isCalculatorView);
+
+            let progressWidth = '33%';
+            let stepKey = 'progressStep1';
+            let showBack = false;
+            let backTarget = '';
+
             if (viewId === 'view-question1') {
-                updateProgress(1, 'progressStep1');
-                backArrow.classList.add('hidden');
-            } else {
-                backArrow.classList.remove('hidden');
-                if (viewId === 'view-question2') { updateProgress(2, 'progressStep2'); backArrow.onclick = () => goBack('view-question1');
-                } else if (viewId === 'view-result') { updateProgress(3, 'progressStep3'); backArrow.onclick = () => goBack('view-question2');
-                } else if (viewId === 'view-apply') { backArrow.onclick = () => goBack('view-result');
-                } else if (viewId === 'view-calculation') { backArrow.onclick = () => goBack('view-result');
-                } else if (viewId === 'view-privacy') { backArrow.onclick = () => goBack('view-apply');
-                } else { backArrow.classList.add('hidden'); }
+                // Default state
+            } else if (viewId === 'view-question2') {
+                progressWidth = '66%';
+                stepKey = 'progressStep2';
+                showBack = true;
+                backTarget = 'view-question1';
+            } else if (viewId === 'view-result') {
+                progressWidth = '100%';
+                stepKey = 'progressStep3';
+                showBack = true;
+                backTarget = 'view-question2';
+            } else if (viewId === 'view-apply') {
+                showBack = true;
+                backTarget = 'view-result';
+            } else if (viewId === 'view-calculation') {
+                showBack = true;
+                backTarget = 'view-result';
             }
+            
+            dom.backArrow.classList.toggle('hidden', !showBack);
+            dom.backArrow.onclick = () => showView(backTarget);
+            dom.progressBar.style.width = progressWidth;
+
+            const langPack = translations[state.lang] || translations.en;
+            const pageText = langPack[stepKey] || '';
+            const template = langPack.progressTextTemplate || '';
+            const stepNumber = (stepKey === 'progressStep1') ? 1 : (stepKey === 'progressStep2') ? 2 : 3;
+            dom.progressText.innerHTML = template.replace('{step}', stepNumber).replace('{page}', pageText);
         }
 
-        function goBack(viewId) { showView(viewId); }
-        function restart() { state.driverType = null; state.miles = 0; state.takeHomePay = 0; const mi = document.getElementById('miles-input'); if (mi) mi.value = ''; showView('view-question1'); }
-        function fireConfetti() { const d=3*1000,a=Date.now()+d,def={startVelocity:30,spread:360,ticks:60,zIndex:100};function r(m,x){return Math.random()*(x-m)+m}const i=setInterval(function(){const t=a-Date.now();if(t<=0)return clearInterval(i);const p=50*(t/d);confetti({...def,particleCount:p,origin:{x:r(0.1,0.3),y:Math.random()-0.2}});confetti({...def,particleCount:p,origin:{x:r(0.7,0.9),y:Math.random()-0.2}})},250);}
-        function selectDriverType(type) { state.driverType = type; showView('view-question2'); const mEl = document.getElementById('miles-input'); if (mEl) mEl.focus(); }
-        function submitMiles() { const mi=document.getElementById('miles-input');const m=parseFloat(mi.value);if(isNaN(m)||m<=0){alert('Please enter a valid number of miles.');return}state.miles=m;trackClickEvent(`Calculated Miles: ${m}`);calculateResult();showView('view-result');fireConfetti();}
-        function calculateResult() { let result = 0; const miles = state.miles; switch(state.driverType){case 'lease':const gL=miles*2.15;result=gL-(gL*0.15)-900-(0.12*miles)-375-(miles*0.45)-75-37-250;break;case 'company':result=miles*0.65;break;case 'owner':const gO=miles*2.15;result=gO-(gO*0.12)-375-(miles*0.45)-75-37-250;break} state.takeHomePay = result; document.getElementById('result-amount').textContent=toCurrency(result); const msgEl=document.getElementById('result-message'); const langTrans = translations[state.lang] || translations.en; if(result>2800)msgEl.innerHTML=langTrans.resultMsgHigh; else if(result>=1800)msgEl.innerHTML=langTrans.resultMsgMid; else msgEl.innerHTML=langTrans.resultMsgLow;}
-        function showSharedResult(t, m, r, l) { if(translations[l]) setLanguage(l); state.driverType=t;state.miles=m;state.takeHomePay=parseFloat(r);document.getElementById('result-amount').textContent=toCurrency(state.takeHomePay);calculateResult();showView('view-result');}
-        async function shareResult() { const u=new URL(window.location.href);u.search = ''; u.searchParams.set('type',state.driverType);u.searchParams.set('miles',state.miles);u.searchParams.set('result',state.takeHomePay.toFixed(2)); u.searchParams.set('lang', state.lang); const sU=u.toString();const sD={title:'My Potential Earnings at Ray Star LLC',text:`Check out my potential weekly take-home pay of ${toCurrency(state.takeHomePay)} with Ray Star LLC!`,url:sU};if(navigator.share){try{await navigator.share(sD);trackClickEvent('Shared Successfully')}catch(err){console.error("Share failed:",err);trackClickEvent('Share Cancelled')}}else{const h=document.createElement('textarea');h.value=sU;document.body.appendChild(h);h.select();document.execCommand('copy');document.body.removeChild(h);alert('A shareable link has been copied to your clipboard!')} }
-        function showCalculation() { document.getElementById('calculation-details').innerHTML = getCalculationText(state.driverType, state.miles); showView('view-calculation'); }
-        
-        function getCalculationText(dT, m) { 
+        /**
+         * Calculates the take-home pay based on current state.
+         */
+        function calculateAndDisplayResult() {
+            let result = 0;
+            const miles = state.miles;
+            switch (state.driverType) {
+                case 'lease':
+                    const gL = miles * 2.15;
+                    result = gL - (gL * 0.15) - 900 - (0.12 * miles) - 375 - (miles * 0.45) - 75 - 37 - 250;
+                    break;
+                case 'company':
+                    result = miles * 0.65;
+                    break;
+                case 'owner':
+                    const gO = miles * 2.15;
+                    result = gO - (gO * 0.12) - 375 - (miles * 0.45) - 75 - 37 - 250;
+                    break;
+            }
+            state.takeHomePay = result > 0 ? result : 0;
+            dom.resultAmount.textContent = state.takeHomePay.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+            const langPack = translations[state.lang] || translations.en;
+            if (result > 2800) dom.resultMessage.innerHTML = langPack.resultMsgHigh;
+            else if (result >= 1800) dom.resultMessage.innerHTML = langPack.resultMsgMid;
+            else dom.resultMessage.innerHTML = langPack.resultMsgLow;
+        }
+
+        /**
+         * Generates the HTML for the calculation breakdown.
+         */
+        function getCalculationText() {
             const T = translations[state.lang] || translations.en;
-            let h='';
-            if(dT==='company'){
-                const g=m*0.65;
-                h+=`<div class="p-3 bg-gray-100 rounded-lg"><h3 class="font-bold">${T.companyDriverTitle}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '0.65')}</span><strong>${toCurrency(g)}</strong></p></div>`;
+            const dT = state.driverType;
+            const m = state.miles;
+            let h = '';
+
+            if (dT === 'company') {
+                const g = m * 0.65;
+                h += `<div class="p-3 bg-gray-100 rounded-lg"><h3 class="font-bold">${T.companyDriverTitle}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '0.65')}</span><strong>${(g).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</strong></p></div>`;
                 return h;
             }
-            const gI=m*2.15;let fC=[{l:'Cargo & Liability Insurance',v:375},{l:'Trailer Charge',v:250},{l:'Admin Fee',v:75},{l:'Occupational Insurance',v:37}];let vC=[{l:'Fuel Expense ($0.45/mile)',v:m*0.45}];if(dT==='lease'){fC.unshift({l:'Truck Charge',v:900});vC.unshift({l:`Service Charge (15%)`,v:gI*0.15});vC.push({l:`Mileage Charge ($0.12/mile)`,v:m*0.12})}else{vC.unshift({l:`Service Charge (12%)`,v:gI*0.12})}const tF=fC.reduce((s,i)=>s+i.v,0);const tV=vC.reduce((s,i)=>s+i.v,0);const tE=tF+tV;const tH=gI-tE;h+=`<div class="p-3 bg-green-50 border border-green-200 rounded-lg"><h3 class="font-bold text-green-800">${T.calcGrossIncome}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '2.15')}</span><strong>${toCurrency(gI)}</strong></p></div>`;h+=`<div class="p-3 bg-red-50 border border-red-200 rounded-lg"><h3 class="font-bold text-red-800">${T.calcExpenses}</h3><div class="font-semibold mt-2">${T.calcFixedCosts}</div>`;fC.forEach(i=>{h+=`<p class="flex justify-between"><span>${i.l}</span><span>${toCurrency(i.v)}</span></p>`});h+=`<div class="font-semibold mt-2">${T.calcVariableCosts.replace('{miles}', m)}</div>`;vC.forEach(i=>{h+=`<p class="flex justify-between"><span>${i.l}</span><span>${toCurrency(i.v)}</span></p>`});h+=`<p class="flex justify-between font-bold mt-2 border-t pt-1 border-gray-300"><span>${T.calcTotalExpenses}</span><span>${toCurrency(tE)}</span></p></div>`;h+=`<div class="p-3 bg-blue-50 border border-blue-200 rounded-lg"><h3 class="font-bold text-blue-800">${T.calcTakeHome}</h3><p class="flex justify-between"><span>${toCurrency(gI)} (${T.calcIncome}) - ${toCurrency(tE)} (${T.calcMinusExpenses})</span><strong class="text-lg">${toCurrency(tH)}</strong></p></div>`;return h;
+
+            const gI = m * 2.15;
+            let fC = [{l:'Cargo & Liability Insurance',v:375},{l:'Trailer Charge',v:250},{l:'Admin Fee',v:75},{l:'Occupational Insurance',v:37}];
+            let vC = [{l:'Fuel Expense ($0.45/mile)',v:m*0.45}];
+            
+            if (dT === 'lease') {
+                fC.unshift({l:'Truck Charge',v:900});
+                vC.unshift({l:`Service Charge (15%)`,v:gI*0.15});
+                vC.push({l:`Mileage Charge ($0.12/mile)`,v:m*0.12});
+            } else { // owner
+                vC.unshift({l:`Service Charge (12%)`,v:gI*0.12});
+            }
+
+            const tF = fC.reduce((s,i) => s + i.v, 0);
+            const tV = vC.reduce((s,i) => s + i.v, 0);
+            const tE = tF + tV;
+            const tH = gI - tE;
+
+            const formatCurrency = (num) => num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            
+            h += `<div class="p-3 bg-green-50 border border-green-200 rounded-lg"><h3 class="font-bold text-green-800">${T.calcGrossIncome}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '2.15')}</span><strong>${formatCurrency(gI)}</strong></p></div>`;
+            h += `<div class="p-3 bg-red-50 border border-red-200 rounded-lg"><h3 class="font-bold text-red-800">${T.calcExpenses}</h3><div class="font-semibold mt-2">${T.calcFixedCosts}</div>`;
+            fC.forEach(i => { h += `<p class="flex justify-between"><span>${i.l}</span><span>${formatCurrency(i.v)}</span></p>` });
+            h += `<div class="font-semibold mt-2">${T.calcVariableCosts.replace('{miles}', m)}</div>`;
+            vC.forEach(i => { h += `<p class="flex justify-between"><span>${i.l}</span><span>${formatCurrency(i.v)}</span></p>` });
+            h += `<p class="flex justify-between font-bold mt-2 border-t pt-1 border-gray-300"><span>${T.calcTotalExpenses}</span><span>${formatCurrency(tE)}</span></p></div>`;
+            h += `<div class="p-3 bg-blue-50 border border-blue-200 rounded-lg"><h3 class="font-bold text-blue-800">${T.calcTakeHome}</h3><p class="flex justify-between"><span>${formatCurrency(gI)} (${T.calcIncome}) - ${formatCurrency(tE)} (${T.calcMinusExpenses})</span><strong class="text-lg">${formatCurrency(tH)}</strong></p></div>`;
+            return h;
         }
 
-        function trackEvent(t, v) { const d=new FormData();d.append('action',t);d.append('event',v);if(navigator.sendBeacon){navigator.sendBeacon(scriptURL,d)}else{fetch(scriptURL,{method:'POST',body:d,keepalive:true}).catch(console.error)}}
-        function trackClickEvent(eN) { trackEvent('clickEvent',eN)}
-        function trackLocation() { fetch('https://get.geojs.io/v1/ip/geo.json').then(res=>res.json()).then(data=>{trackEvent('pageView',`Location: ${data.city}, ${data.country}`)}).catch(err=>{console.error('Error fetching location:',err);trackEvent('pageView','Location: Error')})}
+        /**
+         * Sends anonymous tracking data to the backend.
+         */
+        function trackEvent(eventName, eventValue) {
+            const formData = new FormData();
+            formData.append('action', 'eventTracking');
+            formData.append('eventName', eventName);
+            formData.append('eventValue', eventValue);
+            navigator.sendBeacon(SCRIPT_URL, new URLSearchParams(formData));
+        }
         
+        /**
+         * Resets the entire application to its initial state.
+         */
+        function restartApp() {
+            Object.assign(state, { driverType: null, miles: 0, takeHomePay: 0 });
+            dom.applicationForm.reset();
+            dom.milesInput.value = '';
+            showView('view-question1');
+        }
+
+        // --- EVENT LISTENERS INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const langParam = urlParams.get('lang');
-            const savedLang = localStorage.getItem('language');
-            const defaultLang = langParam || savedLang || 'en';
-            setLanguage(defaultLang);
-            
-            const t=urlParams.get('type'),m=urlParams.get('miles'),r=urlParams.get('result');
-            if(t&&m&&r){showSharedResult(t,m,r, langParam)}else{showView('view-question1');trackEvent('pageView','Page Loaded');trackLocation()}
-            
-            const form=document.getElementById('application-form');
-            form.addEventListener('submit',e=>{
-                e.preventDefault();
-                trackClickEvent('Clicked Submit Application');
-                const s=document.getElementById('submit-form-button');
-                s.disabled=true;s.textContent='Submitting...';
-                const f=new FormData(form);
-                f.append('action','formSubmit');
-                f.append('driverType', state.driverType);
-                f.append('miles', state.miles);
-                f.append('potentialPay', state.takeHomePay.toFixed(2));
-                fetch(scriptURL,{method:'POST',body:f})
-                .then(res=>{form.reset();showView('view-thanks')})
-                .catch(err=>{alert('There was an error.')})
-                .finally(()=>{
-                    s.disabled = false;
-                    const langTrans = translations[state.lang] || translations.en;
-                    s.innerHTML = langTrans.submitApplicationButton;
+            setLanguage('en'); // Set default language
+            trackEvent('pageView', 'AppLoaded');
+
+            // Language selection
+            dom.languageToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dom.languageDropdown.classList.toggle('hidden');
+            });
+            document.addEventListener('click', () => dom.languageDropdown.classList.add('hidden'));
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    setLanguage(e.target.dataset.lang);
                 });
+            });
+
+            // Step 1: Select driver type
+            document.querySelectorAll('.driver-type-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    state.driverType = button.dataset.type;
+                    trackEvent('click', `DriverType:${state.driverType}`);
+                    showView('view-question2');
+                });
+            });
+
+            // Step 2: Calculate
+            document.getElementById('calculate-btn').addEventListener('click', () => {
+                const miles = parseInt(dom.milesInput.value, 10);
+                if (isNaN(miles) || miles <= 0) {
+                    alert('Please enter a valid number of miles.');
+                    return;
+                }
+                state.miles = miles;
+                calculateAndDisplayResult();
+                trackEvent('calculation', `Type:${state.driverType},Miles:${state.miles},Pay:${state.takeHomePay.toFixed(2)}`);
+                showView('view-result');
+                confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+            });
+
+            // Result view buttons
+            document.getElementById('see-calculation-btn').addEventListener('click', () => {
+                dom.calculationDetails.innerHTML = getCalculationText();
+                showView('view-calculation');
+            });
+            document.getElementById('apply-now-btn').addEventListener('click', () => showView('view-apply'));
+            document.getElementById('restart-btn').addEventListener('click', restartApp);
+            document.getElementById('start-over-btn').addEventListener('click', restartApp);
+
+            // Application form submission
+            dom.applicationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const originalButtonText = dom.submitFormButton.innerHTML;
+                dom.submitFormButton.disabled = true;
+                dom.submitFormButton.innerHTML = 'Submitting...';
+
+                const formData = new FormData(dom.applicationForm);
+                formData.append('action', 'formSubmit');
+                formData.append('driverType', state.driverType);
+                formData.append('miles', state.miles);
+                formData.append('potentialPay', state.takeHomePay.toFixed(2));
+
+                fetch(SCRIPT_URL, { method: 'POST', body: formData })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.result === 'success') {
+                            trackEvent('formSubmit', 'Success');
+                            showView('view-thanks');
+                        } else {
+                            throw new Error(data.message || 'Submission failed');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Submission Error:', error);
+                        alert('An error occurred. Please try again.');
+                        trackEvent('formSubmit', `Error: ${error.message}`);
+                    })
+                    .finally(() => {
+                        dom.submitFormButton.disabled = false;
+                        dom.submitFormButton.innerHTML = originalButtonText;
+                    });
             });
         });
     </script>
 </body>
 </html>
+
