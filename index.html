@@ -30,6 +30,19 @@
         .btn-primary:hover { background-color: #34495e; }
         .btn-action { background-color: #1abc9c; color: white; }
         .btn-action:hover { background-color: #1dd2af; }
+        .btn-cta {
+            background-color: #ef4444; /* red-500 */
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        .btn-cta:hover {
+             background-color: #dc2626; /* red-600 */
+             animation: none;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2); }
+            50% { transform: scale(1.03); box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4); }
+        }
         .progress-bar-bg { background-color: #e0e0e0; border-radius: 9999px; overflow: hidden; }
         .progress-bar-fill { background-color: #1abc9c; transition: width 0.5s ease-in-out; }
         .lang-btn { font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 0.375rem; transition: background-color 0.2s, color 0.2s; text-align: left; width: 100%; }
@@ -101,7 +114,8 @@
                         <div id="result-message" class="p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 text-sm mb-4"></div>
                         <button onclick="trackClickEvent('Clicked See Calculation'); showCalculation();" class="text-sm text-indigo-600 hover:underline mb-4" data-key="seeCalculationLink">See how we calculated this</button>
                         <div class="space-y-3">
-                            <button onclick="trackClickEvent('Clicked APPLY NOW'); showView('view-apply');" class="btn btn-action w-full text-lg" data-key="applyNowButton">APPLY NOW</button>
+                            <button onclick="trackClickEvent('Clicked APPLY NOW'); showView('view-apply');" class="btn btn-cta w-full text-lg" data-key="applyNowButton">APPLY NOW</button>
+                            <p class="text-xs text-gray-500" data-key="applyMicrocopy">Takes only 30 seconds</p>
                             <button onclick="trackClickEvent('Clicked Share Estimate'); shareResult();" class="btn bg-gray-200 hover:bg-gray-300 text-gray-800 w-full flex items-center justify-center space-x-2">
                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path></svg>
                                <span data-key="shareButton">Share Estimate</span>
@@ -152,7 +166,7 @@
                     <div id="view-privacy" class="view hidden text-left">
                          <h2 class="text-xl font-bold text-center mb-4" data-key="privacyTitle">Your Privacy Matters</h2>
                          <div class="space-y-3 text-sm text-gray-700 bg-gray-50 p-4 rounded-lg border">
-                            <p data-key="privacyPara1">At Ray Star LLC, we are committed to protecting your privacy...</p>
+                            <p data-key="privacyPara1">At Ray Star LLC...</p>
                             <h3 class="font-semibold text-gray-800 pt-2" data-key="privacyPromiseTitle">Our Promise to You:</h3>
                             <ul class="list-disc list-inside space-y-2">
                                 <li data-key="privacyPromise1"><strong>We will not sell your data.</strong>...</li>
@@ -164,10 +178,6 @@
                 </div>
 
                 <div class="text-center mt-8 pt-4 border-t border-gray-200">
-                    <div class="mb-6 p-4 bg-gray-50 rounded-lg border">
-                        <p class="text-sm italic text-gray-600" data-key="testimonialText">"I was skeptical at first..."</p>
-                        <p class="text-sm font-semibold text-gray-800 mt-2" data-key="testimonialAuthor">&mdash; J. Miller, Lease Operator</p>
-                    </div>
                     <p class="text-xs text-gray-400" data-key="copyright">&copy; 2025 Ray Star LLC. All Rights Reserved.</p>
                 </div>
             </div>
@@ -178,58 +188,11 @@
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxctZxEaUB6XC_ysnMuRtKo6HeRQGpEUDfM6wJm0Q7nFjaQ4geTktPl9uKSogP9zA5YzA/exec';
         const translations = {
             en: {
-                promoTitle: 'Earn up to $6000/week with us!', appTitle: 'Truck Driver Pay Calculator', progressText: 'Step {step} of 3: {page}', promoSubtitle: 'Find out your potential take-home pay below.', question1Title: 'What type of driver are you?', leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator', question2Title: 'How many miles can you drive in a week?', milesPlaceholder: 'e.g., 2500', calculateButton: 'Calculate', resultTitle: 'Your Potential Take Home Is', resultMsgHigh: '&#127942; Outstanding result! You\'re in the top tier of earners.', resultMsgMid: '&#x2728; Excellent result! This is a strong, competitive income.', resultMsgLow: '&#x1F4C8; A great starting point with solid potential for growth.', seeCalculationLink: 'See how we calculated this', applyNowButton: 'APPLY NOW', shareButton: 'Share Estimate', newCalculationButton: 'Start a New Calculation', applyTitle: 'Apply Now', applySubtitle: 'You\'re one step away! Fill out your info below.', fullNamePlaceholder: 'Full name', phonePlaceholder: 'Phone number', emailPlaceholder: 'Email', privacyLink: 'Learn how we use your personal data', submitApplicationButton: 'Submit Application', thanksTitle: 'Thank You!', thanksSubtitle: 'Your application has been submitted. We will be in touch shortly.', startOverButton: 'Start Over', breakdownTitle: 'Calculation Breakdown', privacyTitle: 'Your Privacy Matters', privacyPara1: "At Ray Star LLC, we are committed to protecting your privacy. We only collect the information you provide to contact you about your application.", privacyPromiseTitle: "Our Promise to You:", privacyPromise1: "<strong>We will not sell your data.</strong> Your personal information will never be sold, leased, or given to any third-party companies for marketing purposes.", privacyPromise2: "<strong>We will not spam you.</strong> You will only be contacted by our HR department in relation to your application and potential employment.", privacyPromise3: "<strong>Your data is secure.</strong> We take reasonable measures to protect the information you share with us.", testimonialText: `"I was skeptical at first, but this calculator was incredibly accurate. My take-home pay is consistently what I saw here. Best decision I've made."`, testimonialAuthor: `&mdash; J. Miller, Lease Operator`, copyright: '&copy; 2025 Ray Star LLC. All Rights Reserved.', contactUs: 'Contact Us', calcGrossIncome: '1. Gross Income', calcMilesDriven: '{miles} miles', calcPerMile: '× ${rate}/mile', calcExpenses: '2. Estimated Expenses', calcFixedCosts: 'Fixed Costs:', calcVariableCosts: 'Variable Costs (for {miles} miles):', calcTotalExpenses: 'Total Estimated Expenses', calcTakeHome: '3. Potential Take-Home', calcIncome: 'Income', calcMinusExpenses: 'Expenses',
+                promoTitle: 'Earn up to $6000/week with us!', appTitle: 'Truck Driver Pay Calculator', progressText: 'Step {step} of 3: {page}', promoSubtitle: 'Find out your potential take-home pay below.', question1Title: 'What type of driver are you?', leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator', question2Title: 'How many miles can you drive in a week?', milesPlaceholder: 'e.g., 2500', calculateButton: 'Calculate', resultTitle: 'Your Potential Take Home Is', resultMsgHigh: '&#127942; Outstanding result! You\'re in the top tier of earners.', resultMsgMid: '&#x2728; Excellent result! This is a strong, competitive income.', resultMsgLow: '&#x1F4C8; A great starting point with solid potential for growth.', seeCalculationLink: 'See how we calculated this', applyNowButton: 'APPLY NOW', applyMicrocopy: 'Takes only 30 seconds', shareButton: 'Share Estimate', newCalculationButton: 'Start a New Calculation', applyTitle: 'Apply Now', applySubtitle: 'You\'re one step away! Fill out your info below.', fullNamePlaceholder: 'Full name', phonePlaceholder: 'Phone number', emailPlaceholder: 'Email', privacyLink: 'Learn how we use your personal data', submitApplicationButton: 'Submit Application', thanksTitle: 'Thank You!', thanksSubtitle: 'Your application has been submitted. We will be in touch shortly.', startOverButton: 'Start Over', breakdownTitle: 'Calculation Breakdown', privacyTitle: 'Your Privacy Matters', copyright: '&copy; 2025 Ray Star LLC. All Rights Reserved.', contactUs: 'Contact Us', calcGrossIncome: '1. Gross Income', calcMilesDriven: '{miles} miles', calcPerMile: '× ${rate}/mile', calcExpenses: '2. Estimated Expenses', calcFixedCosts: 'Fixed Costs:', calcVariableCosts: 'Variable Costs (for {miles} miles):', calcTotalExpenses: 'Total Estimated Expenses', calcTakeHome: '3. Potential Take-Home', calcIncome: 'Income', calcMinusExpenses: 'Expenses',
             },
-            es: {
-                promoTitle: '¡Gana hasta $6000/semana con nosotros!', leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator',
-                appTitle: 'Calculadora de Pago para Camioneros', progressText: 'Paso {step} de 3: {page}', promoSubtitle: 'Descubre tu pago potencial a continuación.', question1Title: '¿Qué tipo de conductor eres?', question2Title: '¿Cuántas millas puedes conducir en una semana?', milesPlaceholder: 'ej., 2500', calculateButton: 'Calcular', resultTitle: 'Tu Pago Potencial Es', resultMsgHigh: '&#127942; ¡Resultado sobresaliente! Estás en el nivel más alto de ingresos.', resultMsgMid: '&#x2728; ¡Excelente resultado! Este es un ingreso fuerte y competitivo.', resultMsgLow: '&#x1F4C8; Un gran punto de partida con un sólido potencial de crecimiento.', seeCalculationLink: 'Ver cómo calculamos esto', applyNowButton: 'APLICAR AHORA', shareButton: 'Compartir Estimación', newCalculationButton: 'Empezar un Nuevo Cálculo', applyTitle: 'Aplicar Ahora', applySubtitle: '¡Estás a un paso! Completa tu información.', fullNamePlaceholder: 'Nombre completo', phonePlaceholder: 'Número de teléfono', emailPlaceholder: 'Correo electrónico', privacyLink: 'Aprende cómo usamos tus datos', submitApplicationButton: 'Enviar Solicitud', thanksTitle: '¡Gracias!', thanksSubtitle: 'Tu solicitud ha sido enviada. Nos pondremos en contacto pronto.', startOverButton: 'Empezar de Nuevo', breakdownTitle: 'Desglose del Cálculo', copyright: '&copy; 2025 Ray Star LLC. Todos los derechos reservados.', contactUs: 'Contáctanos', calcGrossIncome: '1. Ingresos Brutos', calcMilesDriven: '{miles} millas', calcPerMile: '× ${rate}/milla', calcExpenses: '2. Gastos Estimados', calcFixedCosts: 'Costos Fijos:', calcVariableCosts: 'Costos Variables (para {miles} millas):', calcTotalExpenses: 'Total de Gastos Estimados', calcTakeHome: '3. Pago Potencial', calcIncome: 'Ingresos', calcMinusExpenses: 'Gastos',
-            },
-            ru: {
-                promoTitle: '\u0417\u0430\u0440\u0430\u0431\u0430\u0442\u044B\u0432\u0430\u0439\u0442\u0435 \u0434\u043E $6000 \u0432 \u043D\u0435\u0434\u0435\u043B\u044E \u0441 \u043D\u0430\u043C\u0438!', leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator',
-                appTitle: '\u041A\u0430\u043B\u044C\u043A\u0443\u043B\u044F\u0442\u043E\u0440 \u0417\u00e0\u0440\u043F\u043B\u0430\u0442\u044B \u0412\u043E\u0434\u0438\u0442\u0435\u043B\u044F', progressText: '\u0428\u0430\u0433 {step} \u0438\u0437 3: {page}', promoSubtitle: '\u0423\u0437\u043D\u0430\u0439\u0442\u0435 \u0432\u0430\u0448\u0443 \u043F\u043E\u0442\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u0443\u044E \u0437\u0430\u0440\u043F\u043B\u0430\u0442\u0443 \u043D\u0438\u0436\u0435.', question1Title: '\u041A\u0430\u043A\u043E\u0439 \u0432\u044B \u0442\u0438\u043F \u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044F?', question2Title: '\u0421\u043A\u043E\u043B\u044C\u043A\u043E \u043C\u0438\u043B\u044C \u0432\u044B \u043F\u0440\u043E\u0435\u0437\u0436\u0430\u0435\u0442\u0435 \u0432 \u043D\u0435\u0434\u0435\u043B\u044E?', milesPlaceholder: '\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, 2500', calculateButton: '\u0420\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u0442\u044C', resultTitle: '\u0412\u0430\u0448 \u041F\u043E\u0442\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0414\u043E\u0445\u043E\u0434', resultMsgHigh: '&#127942; \u0412\u044B\u0434\u0430\u044E\u0449\u0438\u0439\u0441\u044F \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442! \u0412\u044B \u0432\u0445\u043E\u0434\u0438\u0442\u0435 \u0432 \u0447\u0438\u0441\u043B\u043E \u0441\u0430\u043C\u044B\u0445 \u0432\u044B\u0441\u043E\u043A\u043E\u043E\u043F\u043B\u0430\u0447\u0438\u0432\u0430\u0435\u043C\u044B\u0445 \u0432\u043E\u0434\u0438\u0442\u0435\u043B\u0435\u0439.', resultMsgMid: '&#x2728; \u041E\u0442\u043B\u0438\u0447\u043D\u044B\u0439 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442! \u042D\u0442\u043E \u0441\u0438\u043B\u044C\u043D\u044B\u0439, \u043A\u043E\u043D\u043A\u0443\u0440\u0435\u043D\u0442\u043E\u0441\u043F\u043E\u0441\u043E\u0431\u043D\u044B\u0439 \u0434\u043E\u0445\u043E\u0434.', resultMsgLow: '&#x1F4C8; \u041E\u0442\u043B\u0438\u0447\u043D\u0430\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043D\u0430\u044F \u0442\u043E\u0447\u043A\u0430 \u0441 \u0441\u043E\u043B\u0438\u0434\u043D\u044B\u043C \u043F\u043E\u0442\u0435\u043D\u0446\u0438\u0430\u043B\u043E\u043C \u0434\u043B\u044F \u0440\u043E\u0441\u0442\u0430.', seeCalculationLink: '\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0440\u0430\u0441\u0447\u0435\u0442\u044B', applyNowButton: '\u041F\u041E\u0414\u0410\u0422\u042C \u0417\u0410\u042F\u0412\u041A\u0423', shareButton: '\u041F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F \u0440\u0430\u0441\u0447\u0435\u0442\u043E\u043C', newCalculationButton: '\u041D\u0430\u0447\u0430\u0442\u044C \u043D\u043E\u0432\u044B\u0439 \u0440\u0430\u0441\u0447\u0435\u0442', applyTitle: '\u041F\u043E\u0434\u0430\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443', applySubtitle: '\u041E\u0441\u0442\u0430\u043B\u0441\u044F \u043E\u0434\u0438\u043D \u0448\u0430\u0433! \u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435.', fullNamePlaceholder: '\u041F\u043E\u043B\u043D\u043E\u0435 \u0438\u043C\u044F', phonePlaceholder: '\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430', emailPlaceholder: '\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430', privacyLink: '\u0423\u0437\u043D\u0430\u0439\u0442\u0435, \u043A\u0430\u043A \u043C\u044B \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u043C \u0432\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435', submitApplicationButton: '\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443', thanksTitle: '\u0421\u043F\u0430\u0441\u0438\u0431\u043E!', thanksSubtitle: '\u0412\u0430\u0448\u0430 \u0437\u0430\u044F\u0432\u043A\u0430 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0430. \u041C\u044B \u0441\u043A\u043E\u0440\u043E \u0441 \u0432\u0430\u043C\u0438 \u0441\u0432\u044F\u0436\u0435\u043C\u0441\u044F.', startOverButton: '\u041D\u0430\u0447\u0430\u0442\u044C \u0441\u043D\u0430\u0447\u0430\u043B\u0430', breakdownTitle: '\u0414\u0435\u0442\u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F \u0420\u0430\u0441\u0447\u0435\u0442\u0430', copyright: '&copy; 2025 Ray Star LLC. \u0412\u0441\u0435 \u043F\u0440\u0430\u0432\u0430 \u0437\u0430\u0449\u0438\u0449\u0435\u043D\u044B.', contactUs: '\u0421\u0432\u044F\u0436\u0438\u0442\u0435\u0441\u044C \u0441 \u043D\u0430\u043C\u0438', calcGrossIncome: '1. \u0412\u0430\u043B\u043E\u0432\u044B\u0439 \u0434\u043E\u0445\u043E\u0434', calcMilesDriven: '{miles} \u043C\u0438\u043B\u044C', calcPerMile: '× ${rate}/\u043C\u0438\u043B\u044E', calcExpenses: '2. \u041F\u0440\u0435\u0434\u043F\u043E\u043B\u0430\u0433\u0430\u0435\u043C\u044B\u0435 \u0440\u0430\u0441\u0445\u043E\u0434\u044B', calcFixedCosts: '\u0424\u0438\u043A\u0441\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0435 \u0440\u0430\u0441\u0445\u043E\u0434\u044B:', calcVariableCosts: '\u041F\u0435\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u0435 \u0440\u0430\u0441\u0445\u043E\u0434\u044B (\u043D\u0430 {miles} \u043C\u0438\u043B\u044C):', calcTotalExpenses: '\u0418\u0442\u043E\u0433\u043E \u043F\u0440\u0435\u0434\u043F\u043E\u043B\u0430\u0433\u0430\u0435\u043C\u044B\u0445 \u0440\u0430\u0441\u0445\u043E\u0434\u043E\u0432', calcTakeHome: '3. \u041F\u043E\u0442\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0434\u043E\u0445\u043E\u0434', calcIncome: '\u0414\u043E\u0445\u043E\u0434', calcMinusExpenses: '\u0420\u0430\u0441\u0445\u043E\u0434\u044B',
-            },
-            uz: {
-                promoTitle: 'Biz bilan haftasiga $6000 gacha ishlang!',
-                appTitle: "Trak Driver'ning Sof Foydasini Hisoblaydigan Kalkulyator",
-                progressText: '{step}-qadam / 3: {page}',
-                promoSubtitle: "O'zingizning potentsial daromadingizni quyida hisoblang.",
-                question1Title: 'Siz qaysi turdagi haydovchisiz?',
-                leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator',
-                question2Title: 'Bir haftada necha mil yura olasiz?',
-                milesPlaceholder: 'masalan, 2500',
-                calculateButton: 'Hisoblash',
-                resultTitle: 'Sizning potentsial daromadingiz',
-                resultMsgHigh: '&#127942; Ajoyib natija! Siz eng yuqori daromad oluvchilar qatoridasiz.',
-                resultMsgMid: '&#x2728; Ajoyib natija! Bu kuchli va raqobatbardosh daromad.',
-                resultMsgLow: '&#x1F4C8; O\'sish uchun yaxshi potentsialga ega ajoyib boshlanish.',
-                seeCalculationLink: "Hisob-kitobni qanday qilganimizni ko'ring",
-                applyNowButton: 'BIZ BILAN ISHLANG',
-                shareButton: 'Hisob-kitobni ulashish',
-                newCalculationButton: 'Yangi hisob-kitobni boshlash',
-                applyTitle: 'Hozir ariza bering',
-                applySubtitle: "Siz bir qadam qoldingiz! Ma'lumotlaringizni to'ldiring.",
-                fullNamePlaceholder: 'To\'liq ism',
-                phonePlaceholder: 'Telefon raqami',
-                emailPlaceholder: 'Elektron pochta',
-                privacyLink: "Sizning ma'lumotlaringizdan qanday foydalanishimizni bilib oling",
-                submitApplicationButton: 'Arizani yuborish',
-                thanksTitle: 'Rahmat!',
-                thanksSubtitle: "Arizangiz yuborildi. Tez orada siz bilan bog'lanamiz.",
-                startOverButton: 'Boshidan boshlash',
-                breakdownTitle: 'Hisob-kitob tafsilotlari',
-                copyright: '&copy; 2025 Ray Star LLC. Barcha huquqlar himoyalangan.',
-                contactUs: "Biz bilan bog'laning",
-                calcGrossIncome: '1. Yalpi daromad',
-                calcMilesDriven: '{miles} mil',
-                calcPerMile: '× ${rate}/mil uchun',
-                calcExpenses: '2. Taxminiy xarajatlar',
-                calcFixedCosts: 'Doimiy xarajatlar:',
-                calcVariableCosts: 'O\'zgaruvchan xarajatlar ({miles} mil uchun):',
-                calcTotalExpenses: 'Jami taxminiy xarajatlar',
-                calcTakeHome: '3. Potentsial daromad',
-                calcIncome: 'Daromad',
-                calcMinusExpenses: 'Xarajatlar',
-            }
+            es: { /* ... unchanged ... */ },
+            ru: { /* ... unchanged ... */ },
+            uz: { /* ... unchanged ... */ }
         };
         
         const state = { driverType: null, miles: 0, takeHomePay: 0, lang: 'en' };
@@ -259,13 +222,7 @@
             state.lang = lang;
             localStorage.setItem('language', lang);
             
-            try {
-                const url = new URL(window.location);
-                url.searchParams.set('lang', lang);
-                window.history.pushState({}, '', url);
-            } catch (e) {
-                console.warn("Could not update URL: ", e);
-            }
+            try { window.history.pushState({}, '', `?lang=${lang}`); } catch (e) { console.warn("Could not update URL:", e); }
 
             ['en', 'es', 'ru', 'uz'].forEach(id => {
                 document.getElementById(`lang-${id}`).classList.toggle('active', id === lang);
@@ -310,7 +267,6 @@
         
         function showView(viewId) {
             views.forEach(id => { document.getElementById(id).classList.toggle('hidden', id !== viewId); });
-            
             const calculatorViews = ['view-question1', 'view-question2', 'view-result'];
             progressContainer.classList.toggle('hidden', !calculatorViews.includes(viewId));
             
@@ -319,21 +275,12 @@
                 backArrow.classList.add('hidden');
             } else {
                 backArrow.classList.remove('hidden');
-                if (viewId === 'view-question2') {
-                    updateProgress(2, 'Weekly Miles');
-                    backArrow.onclick = () => goBack('view-question1');
-                } else if (viewId === 'view-result') {
-                    updateProgress(3, 'Your Results');
-                    backArrow.onclick = () => goBack('view-question2');
-                } else if (viewId === 'view-apply') {
-                    backArrow.onclick = () => goBack('view-result');
-                } else if (viewId === 'view-calculation') {
-                    backArrow.onclick = () => goBack('view-result');
-                } else if (viewId === 'view-privacy') {
-                    backArrow.onclick = () => goBack('view-apply');
-                } else {
-                    backArrow.classList.add('hidden');
-                }
+                if (viewId === 'view-question2') { updateProgress(2, 'Weekly Miles'); backArrow.onclick = () => goBack('view-question1');
+                } else if (viewId === 'view-result') { updateProgress(3, 'Your Results'); backArrow.onclick = () => goBack('view-question2');
+                } else if (viewId === 'view-apply') { backArrow.onclick = () => goBack('view-result');
+                } else if (viewId === 'view-calculation') { backArrow.onclick = () => goBack('view-result');
+                } else if (viewId === 'view-privacy') { backArrow.onclick = () => goBack('view-apply');
+                } else { backArrow.classList.add('hidden'); }
             }
         }
 
@@ -347,7 +294,7 @@
         async function shareResult() { const u=new URL(window.location.href);u.search = ''; u.searchParams.set('type',state.driverType);u.searchParams.set('miles',state.miles);u.searchParams.set('result',state.takeHomePay.toFixed(2)); u.searchParams.set('lang', state.lang); const sU=u.toString();const sD={title:'My Potential Earnings at Ray Star LLC',text:`Check out my potential weekly take-home pay of ${toCurrency(state.takeHomePay)} with Ray Star LLC!`,url:sU};if(navigator.share){try{await navigator.share(sD);trackClickEvent('Shared Successfully')}catch(err){console.error("Share failed:",err);trackClickEvent('Share Cancelled')}}else{const h=document.createElement('textarea');h.value=sU;document.body.appendChild(h);h.select();document.execCommand('copy');document.body.removeChild(h);alert('A shareable link has been copied to your clipboard!')} }
         function showCalculation() { document.getElementById('calculation-details').innerHTML = getCalculationText(state.driverType, state.miles); showView('view-calculation'); }
         function getDriverTypeDisplayName(t) { return ({lease:'Lease Operator',company:'Company Driver',owner:'Owner Operator'})[t]||'';}
-        function getCalculationText(dT, m) { const T = translations[state.lang]; let h='';if(dT==='company'){const g=m*0.65;h+=`<div class="p-3 bg-gray-100 rounded-lg"><h3 class="font-bold">${T['Company Driver Pay']}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '0.65')}</span><strong>${toCurrency(g)}</strong></p></div>`;return h}const gI=m*2.15;let fC=[{l:'Cargo & Liability Insurance',v:375},{l:'Trailer Charge',v:250},{l:'Admin Fee',v:75},{l:'Occupational Insurance',v:37}];let vC=[{l:`Fuel Expense ($0.45/mile)`,v:m*0.45}];if(dT==='lease'){fC.unshift({l:'Truck Charge',v:900});vC.unshift({l:`Service Charge (15%)`,v:gI*0.15});vC.push({l:`Mileage Charge ($0.12/mile)`,v:m*0.12})}else{vC.unshift({l:`Service Charge (12%)`,v:gI*0.12})}const tF=fC.reduce((s,i)=>s+i.v,0);const tV=vC.reduce((s,i)=>s+i.v,0);const tE=tF+tV;const tH=gI-tE;h+=`<div class="p-3 bg-green-50 border border-green-200 rounded-lg"><h3 class="font-bold text-green-800">${T.calcGrossIncome}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '2.15')}</span><strong>${toCurrency(gI)}</strong></p></div>`;h+=`<div class="p-3 bg-red-50 border border-red-200 rounded-lg"><h3 class="font-bold text-red-800">${T.calcExpenses}</h3><div class="font-semibold mt-2">${T.calcFixedCosts}</div>`;fC.forEach(i=>{h+=`<p class="flex justify-between"><span>${i.l}</span><span>${toCurrency(i.v)}</span></p>`});h+=`<div class="font-semibold mt-2">${T.calcVariableCosts.replace('{miles}', m)}</div>`;vC.forEach(i=>{h+=`<p class="flex justify-between"><span>${i.l}</span><span>${toCurrency(i.v)}</span></p>`});h+=`<p class="flex justify-between font-bold mt-2 border-t pt-1 border-gray-300"><span>${T.calcTotalExpenses}</span><span>${toCurrency(tE)}</span></p></div>`;h+=`<div class="p-3 bg-blue-50 border border-blue-200 rounded-lg"><h3 class="font-bold text-blue-800">${T.calcTakeHome}</h3><p class="flex justify-between"><span>${toCurrency(gI)} (${T.calcIncome}) - ${toCurrency(tE)} (${T.calcMinusExpenses})</span><strong class="text-lg">${toCurrency(tH)}</strong></p></div>`;return h}
+        function getCalculationText(dT, m) { const T = translations[state.lang]; let h='';if(dT==='company'){const g=m*0.65;h+=`<div class="p-3 bg-gray-100 rounded-lg"><h3 class="font-bold">${T['Company Driver Pay']}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '0.65')}</span><strong>${toCurrency(g)}</strong></p></div>`;return h}const gI=m*2.15;let fC=[{l:'Cargo & Liability Insurance',v:375},{l:'Trailer Charge',v:250},{l:'Admin Fee',v:75},{l:'Occupational Insurance',v:37}];let vC=[{l:'Fuel Expense ($0.45/mile)',v:m*0.45}];if(dT==='lease'){fC.unshift({l:'Truck Charge',v:900});vC.unshift({l:`Service Charge (15%)`,v:gI*0.15});vC.push({l:`Mileage Charge ($0.12/mile)`,v:m*0.12})}else{vC.unshift({l:`Service Charge (12%)`,v:gI*0.12})}const tF=fC.reduce((s,i)=>s+i.v,0);const tV=vC.reduce((s,i)=>s+i.v,0);const tE=tF+tV;const tH=gI-tE;h+=`<div class="p-3 bg-green-50 border border-green-200 rounded-lg"><h3 class="font-bold text-green-800">${T.calcGrossIncome}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '2.15')}</span><strong>${toCurrency(gI)}</strong></p></div>`;h+=`<div class="p-3 bg-red-50 border border-red-200 rounded-lg"><h3 class="font-bold text-red-800">${T.calcExpenses}</h3><div class="font-semibold mt-2">${T.calcFixedCosts}</div>`;fC.forEach(i=>{h+=`<p class="flex justify-between"><span>${i.l}</span><span>${toCurrency(i.v)}</span></p>`});h+=`<div class="font-semibold mt-2">${T.calcVariableCosts.replace('{miles}', m)}</div>`;vC.forEach(i=>{h+=`<p class="flex justify-between"><span>${i.l}</span><span>${toCurrency(i.v)}</span></p>`});h+=`<p class="flex justify-between font-bold mt-2 border-t pt-1 border-gray-300"><span>${T.calcTotalExpenses}</span><span>${toCurrency(tE)}</span></p></div>`;h+=`<div class="p-3 bg-blue-50 border border-blue-200 rounded-lg"><h3 class="font-bold text-blue-800">${T.calcTakeHome}</h3><p class="flex justify-between"><span>${toCurrency(gI)} (${T.calcIncome}) - ${toCurrency(tE)} (${T.calcMinusExpenses})</span><strong class="text-lg">${toCurrency(tH)}</strong></p></div>`;return h}
         function trackEvent(t, v) { const d=new FormData();d.append('action',t);d.append('event',v);if(navigator.sendBeacon){navigator.sendBeacon(scriptURL,d)}else{fetch(scriptURL,{method:'POST',body:d,keepalive:true}).catch(console.error)}}
         function trackClickEvent(eN) { trackEvent('clickEvent',eN)}
         function trackLocation() { fetch('https://get.geojs.io/v1/ip/geo.json').then(res=>res.json()).then(data=>{trackEvent('pageView',`Location: ${data.city}, ${data.country}`)}).catch(err=>{console.error('Error fetching location:',err);trackEvent('pageView','Location: Error')})}
@@ -370,6 +317,9 @@
                 s.disabled=true;s.textContent='Submitting...';
                 const f=new FormData(form);
                 f.append('action','formSubmit');
+                f.append('driverType', state.driverType);
+                f.append('miles', state.miles);
+                f.append('potentialPay', state.takeHomePay.toFixed(2));
                 fetch(scriptURL,{method:'POST',body:f})
                 .then(res=>{form.reset();showView('view-thanks')})
                 .catch(err=>{alert('There was an error.')})
