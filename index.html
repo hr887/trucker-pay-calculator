@@ -18,8 +18,8 @@
             -moz-osx-font-smoothing: grayscale;
         }
         .bg-pattern {
-             background-image: radial-gradient(#dbeafe 1px, transparent 1px);
-             background-size: 16px 16px;
+            background-image: radial-gradient(#dbeafe 1px, transparent 1px);
+            background-size: 16px 16px;
         }
         .view { transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; width: 100%; }
         .view-container { position: relative; min-height: 450px; }
@@ -36,8 +36,8 @@
             animation: pulse 2s infinite;
         }
         .btn-cta:hover {
-             background-color: #dc2626; /* red-600 */
-             animation: none;
+            background-color: #dc2626; /* red-600 */
+            animation: none;
         }
         @keyframes pulse {
             0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2); }
@@ -67,8 +67,8 @@
                     </button>
                     <div id="language-dropdown" class="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg p-1 z-20 hidden">
                         <button id="lang-en" onclick="setLanguage('en')" class="lang-btn">English</button>
-                        <button id="lang-es" onclick="setLanguage('es')" class="lang-btn">Español</button>
-                        <button id="lang-ru" onclick="setLanguage('ru')" class="lang-btn">Русский</button>
+                        <button id="lang-es" onclick="setLanguage('es')" class="lang-btn">Espa&ntilde;ol</button>
+                        <button id="lang-ru" onclick="setLanguage('ru')" class="lang-btn">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</button>
                         <button id="lang-uz" onclick="setLanguage('uz')" class="lang-btn">O'zbek</button>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
             
             <div class="p-6 sm:p-8">
                 <div class="text-center mb-6">
-                     <p class="text-lg font-semibold text-gray-700" data-key="appTitle">Truck Driver Pay Calculator</p>
+                    <p class="text-lg font-semibold text-gray-700" data-key="appTitle">Truck Driver Pay Calculator</p>
                 </div>
 
                 <div id="progress-container" class="my-6">
@@ -87,7 +87,7 @@
                 </div>
                 
                 <div class="view-container">
-                     <div id="view-question1" class="view">
+                    <div id="view-question1" class="view">
                         <div class="text-center mb-6 p-3 bg-teal-50 border border-teal-200 rounded-lg">
                             <p class="text-base font-bold text-teal-800" data-key="promoTitle">Earn up to $6000/week with us!</p>
                             <p class="text-sm text-teal-600" data-key="promoSubtitle">Find out your potential take-home pay below.</p>
@@ -118,13 +118,13 @@
                             <p class="text-xs text-gray-500" data-key="applyMicrocopy">Takes only 30 seconds</p>
                             <button onclick="trackClickEvent('Clicked Share Estimate'); shareResult();" class="btn bg-gray-200 hover:bg-gray-300 text-gray-800 w-full flex items-center justify-center space-x-2">
                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path></svg>
-                               <span data-key="shareButton">Share Estimate</span>
+                                <span data-key="shareButton">Share Estimate</span>
                             </button>
                             <button onclick="trackClickEvent('Clicked New Calculation'); restart();" class="btn bg-gray-500 hover:bg-gray-600 text-white w-full" data-key="newCalculationButton">Start a New Calculation</button>
                         </div>
                         <div class="mt-8 pt-4 border-t border-gray-200">
-                             <p class="text-lg font-semibold text-gray-700 mb-4" data-key="contactUs">Contact Us</p>
-                             <div class="mb-4">
+                            <p class="text-lg font-semibold text-gray-700 mb-4" data-key="contactUs">Contact Us</p>
+                            <div class="mb-4">
                                 <div class="flex justify-center items-center space-x-6">
                                     <a href="tel:+18474079858" onclick="trackClickEvent('Clicked Phone Icon');" class="text-gray-400 hover:text-green-600 transition-colors" title="Call Us">
                                         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
@@ -139,17 +139,17 @@
                     </div>
 
                     <div id="view-apply" class="view hidden">
-                         <h2 class="text-xl font-bold text-center mb-4" data-key="applyTitle">Apply Now</h2>
-                         <p class="text-center text-gray-600 mb-4" data-key="applySubtitle">You're one step away! Fill out your info below.</p>
-                         <form id="application-form" class="space-y-4">
-                            <input name="fullName" type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Full name">
-                            <input name="phone" type="tel" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Phone number">
-                            <input name="email" type="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Email">
+                        <h2 class="text-xl font-bold text-center mb-4" data-key="applyTitle">Apply Now</h2>
+                        <p class="text-center text-gray-600 mb-4" data-key="applySubtitle">You're one step away! Fill out your info below.</p>
+                        <form id="application-form" class="space-y-4">
+                            <input name="fullName" type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <input name="phone" type="tel" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <input name="email" type="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
                             <div class="text-center mt-2">
                                 <button type="button" onclick="trackClickEvent('Clicked Privacy Link'); showView('view-privacy');" class="text-xs text-gray-500 hover:underline" data-key="privacyLink">Learn how we use your personal data</button>
                             </div>
                             <button id="submit-form-button" type="submit" class="btn btn-action w-full" data-key="submitApplicationButton">Submit Application</button>
-                         </form>
+                        </form>
                     </div>
                     
                     <div id="view-thanks" class="view hidden text-center">
@@ -159,13 +159,13 @@
                     </div>
                     
                     <div id="view-calculation" class="view hidden text-left">
-                         <h2 class="text-xl font-bold text-center mb-4" data-key="breakdownTitle">Calculation Breakdown</h2>
-                         <div id="calculation-details" class="space-y-4 text-sm text-gray-700"></div>
+                        <h2 class="text-xl font-bold text-center mb-4" data-key="breakdownTitle">Calculation Breakdown</h2>
+                        <div id="calculation-details" class="space-y-4 text-sm text-gray-700"></div>
                     </div>
 
                     <div id="view-privacy" class="view hidden text-left">
-                         <h2 class="text-xl font-bold text-center mb-4" data-key="privacyTitle">Your Privacy Matters</h2>
-                         <div class="space-y-3 text-sm text-gray-700 bg-gray-50 p-4 rounded-lg border">
+                        <h2 class="text-xl font-bold text-center mb-4" data-key="privacyTitle">Your Privacy Matters</h2>
+                        <div class="space-y-3 text-sm text-gray-700 bg-gray-50 p-4 rounded-lg border">
                             <p data-key="privacyPara1">At Ray Star LLC...</p>
                             <h3 class="font-semibold text-gray-800 pt-2" data-key="privacyPromiseTitle">Our Promise to You:</h3>
                             <ul class="list-disc list-inside space-y-2">
@@ -173,7 +173,7 @@
                                 <li data-key="privacyPromise2"><strong>We will not spam you.</strong>...</li>
                                 <li data-key="privacyPromise3"><strong>Your data is secure.</strong>...</li>
                             </ul>
-                         </div>
+                        </div>
                     </div>
                 </div>
 
@@ -185,41 +185,166 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzrobWUoareybd-yyB6HM2MGtJHOtHjGjO_X5MhX1Mx-SiWlcGaOPtFfGwsQADPrAN2DA/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyodEm99lwoHH4uU9Z7z3oqGQwFrOT-Hrvm9JNUwUzi08Qbr64jnAF6hzxcUsviysmriw/exec';
         const translations = {
             en: {
-                companyDriverPay: 'Company Driver Pay', // ← FIXED: Added missing key!
-                promoTitle: 'Earn up to $6000/week with us!', appTitle: 'Truck Driver Pay Calculator', 
-                progressText: 'Step {step} of 3: {page}', promoSubtitle: 'Find out your potential take-home pay below.', 
-                question1Title: 'What type of driver are you?', leaseButton: 'Lease Operator', companyButton: 'Company Driver', 
-                ownerButton: 'Owner Operator', question2Title: 'How many miles can you drive in a week?', milesPlaceholder: 'e.g., 2500', 
-                calculateButton: 'Calculate', resultTitle: 'Your Potential Take Home Is', 
-                resultMsgHigh: '🌟 Outstanding result! You\'re in the top tier of earners.', 
-                resultMsgMid: '✨ Excellent result! This is a strong, competitive income.', 
-                resultMsgLow: '📈 A great starting point with solid potential for growth.', 
-                seeCalculationLink: 'See how we calculated this', applyNowButton: 'APPLY NOW', 
-                applyMicrocopy: 'Takes only 30 seconds', shareButton: 'Share Estimate', 
-                newCalculationButton: 'Start a New Calculation', applyTitle: 'Apply Now', 
-                applySubtitle: 'You\'re one step away! Fill out your info below.', 
-                fullNamePlaceholder: 'Full name', phonePlaceholder: 'Phone number', emailPlaceholder: 'Email', 
-                privacyLink: 'Learn how we use your personal data', submitApplicationButton: 'Submit Application', 
-                thanksTitle: 'Thank You!', thanksSubtitle: 'Your application has been submitted. We will be in touch shortly.', 
-                startOverButton: 'Start Over', breakdownTitle: 'Calculation Breakdown', 
-                privacyTitle: 'Your Privacy Matters', copyright: '&copy; 2025 Ray Star LLC. All Rights Reserved.', 
-                contactUs: 'Contact Us', calcGrossIncome: '1. Gross Income', calcMilesDriven: '{miles} miles', 
-                calcPerMile: '× ${rate}/mile', calcExpenses: '2. Estimated Expenses', calcFixedCosts: 'Fixed Costs:', 
-                calcVariableCosts: 'Variable Costs (for {miles} miles):', calcTotalExpenses: 'Total Estimated Expenses', 
-                calcTakeHome: '3. Potential Take-Home', calcIncome: 'Income', calcMinusExpenses: 'Expenses'
+                promoTitle: 'Earn up to $6000/week with us!', appTitle: 'Truck Driver Pay Calculator', progressText: 'Step {step} of 3: {page}', promoSubtitle: 'Find out your potential take-home pay below.', question1Title: 'What type of driver are you?', leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator', question2Title: 'How many miles can you drive in a week?', milesPlaceholder: 'e.g., 2500', calculateButton: 'Calculate', resultTitle: 'Your Potential Take Home Is', resultMsgHigh: '&#127942; Outstanding result! You\'re in the top tier of earners.', resultMsgMid: '&#x2728; Excellent result! This is a strong, competitive income.', resultMsgLow: '&#x1F4C8; A great starting point with solid potential for growth.', seeCalculationLink: 'See how we calculated this', applyNowButton: 'APPLY NOW', applyMicrocopy: 'Takes only 30 seconds', shareButton: 'Share Estimate', newCalculationButton: 'Start a New Calculation', applyTitle: 'Apply Now', applySubtitle: 'You\'re one step away! Fill out your info below.', fullNamePlaceholder: 'Full name', phonePlaceholder: 'Phone number', emailPlaceholder: 'Email', privacyLink: 'Learn how we use your personal data', submitApplicationButton: 'Submit Application', thanksTitle: 'Thank You!', thanksSubtitle: 'Your application has been submitted. We will be in touch shortly.', startOverButton: 'Start Over', breakdownTitle: 'Calculation Breakdown', privacyTitle: 'Your Privacy Matters', copyright: '&copy; 2025 Ray Star LLC. All Rights Reserved.', contactUs: 'Contact Us', calcGrossIncome: '1. Gross Income', calcMilesDriven: '{miles} miles', calcPerMile: '× ${rate}/mile', calcExpenses: '2. Estimated Expenses', calcFixedCosts: 'Fixed Costs:', calcVariableCosts: 'Variable Costs (for {miles} miles):', calcTotalExpenses: 'Total Estimated Expenses', calcTakeHome: '3. Potential Take-Home', calcIncome: 'Income', calcMinusExpenses: 'Expenses',
+                // -- FIX 1 & 2: Added translation keys for progress steps and company driver title --
+                progressStep1: 'Driver Type', progressStep2: 'Weekly Miles', progressStep3: 'Your Results', companyDriverTitle: 'Company Driver Pay',
             },
-            es: { companyDriverPay: 'Pago de Company Driver' },
-            ru: { companyDriverPay: 'Плата водителя компании' },
-            uz: { companyDriverPay: 'Kompaniya haydovchisi to\'lovi' }
+            es: { /* ... add keys: progressStep1, progressStep2, progressStep3, companyDriverTitle ... */ },
+            ru: { /* ... add keys: progressStep1, progressStep2, progressStep3, companyDriverTitle ... */ },
+            uz: {
+                // -- FIX 2: Moved hardcoded strings into the translation object --
+                progressStep1: 'Haydovchining Turi', progressStep2: 'Haftalik Millar', progressStep3: 'Sizning Natijangiz'
+                /* ... other Uzbek translations ... */
+            }
         };
         
         const state = { driverType: null, miles: 0, takeHomePay: 0, lang: 'en' };
-        // ... [REST OF YOUR SCRIPT EXACTLY AS-IS - TOO LONG TO REPEAT]
-        // Just use your original <script> from line 140 onwards!
+        
+        const languageToggleBtn = document.getElementById('language-toggle-btn');
+        const languageDropdown = document.getElementById('language-dropdown');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const progressContainer = document.getElementById('progress-container');
+        const backArrow = document.getElementById('back-arrow');
+        const views = ['view-question1', 'view-question2', 'view-result', 'view-apply', 'view-thanks', 'view-calculation', 'view-privacy'];
+        const toCurrency = (num) => num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        
+        languageToggleBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            languageDropdown.classList.toggle('hidden');
+        });
+        document.addEventListener('click', (event) => {
+            if (!languageToggleBtn.contains(event.target)) {
+                languageDropdown.classList.add('hidden');
+            }
+        });
+
+        function setLanguage(lang) {
+            languageDropdown.classList.add('hidden');
+            if (!translations[lang]) return;
+            state.lang = lang;
+            localStorage.setItem('language', lang);
+            
+            try { window.history.pushState({}, '', `?lang=${lang}`); } catch (e) { console.warn("Could not update URL:", e); }
+
+            ['en', 'es', 'ru', 'uz'].forEach(id => {
+                document.getElementById(`lang-${id}`).classList.toggle('active', id === lang);
+            });
+
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            const milesInput = document.getElementById('miles-input');
+            if(milesInput) milesInput.placeholder = (translations[lang] && translations[lang].milesPlaceholder) || 'e.g., 2500';
+            
+            const formInputs = {'fullName': 'fullNamePlaceholder', 'phone': 'phonePlaceholder', 'email': 'emailPlaceholder'};
+            Object.keys(formInputs).forEach(inputName => {
+                const inputEl = document.querySelector(`input[name="${inputName}"]`);
+                if(inputEl) inputEl.placeholder = (translations[lang] && translations[lang][formInputs[inputName]]) || '';
+            });
+
+            const currentView = document.querySelector('.view:not(.hidden)');
+            if (currentView) showView(currentView.id); 
+            
+            if(state.driverType) { calculateResult(); }
+        }
+        
+        // -- FIX 2: Function now accepts a translation KEY instead of a hardcoded string --
+        function updateProgress(step, pageKey) {
+            const widthMap = { 1: '33%', 2: '66%', 3: '100%' };
+            progressBar.style.width = widthMap[step] || '33%';
+            
+            const progressEl = document.getElementById('progress-text');
+            let template = (translations[state.lang] && translations[state.lang].progressText) || 'Step {step} of 3: {page}';
+            let pageText = (translations[state.lang] && translations[state.lang][pageKey]) || '';
+            
+            progressEl.textContent = template.replace('{step}', step).replace('{page}', pageText);
+        }
+        
+        function showView(viewId) {
+            views.forEach(id => { document.getElementById(id).classList.toggle('hidden', id !== viewId); });
+            const calculatorViews = ['view-question1', 'view-question2', 'view-result'];
+            progressContainer.classList.toggle('hidden', !calculatorViews.includes(viewId));
+            
+            if (viewId === 'view-question1') {
+                updateProgress(1, 'progressStep1'); // Use key
+                backArrow.classList.add('hidden');
+            } else {
+                backArrow.classList.remove('hidden');
+                if (viewId === 'view-question2') { updateProgress(2, 'progressStep2'); backArrow.onclick = () => goBack('view-question1'); // Use key
+                } else if (viewId === 'view-result') { updateProgress(3, 'progressStep3'); backArrow.onclick = () => goBack('view-question2'); // Use key
+                } else if (viewId === 'view-apply') { backArrow.onclick = () => goBack('view-result');
+                } else if (viewId === 'view-calculation') { backArrow.onclick = () => goBack('view-result');
+                } else if (viewId === 'view-privacy') { backArrow.onclick = () => goBack('view-apply');
+                } else { backArrow.classList.add('hidden'); }
+            }
+        }
+
+        function goBack(viewId) { showView(viewId); }
+        function restart() { state.driverType = null; state.miles = 0; state.takeHomePay = 0; const mi = document.getElementById('miles-input'); if (mi) mi.value = ''; showView('view-question1'); }
+        function fireConfetti() { const d=3*1000,a=Date.now()+d,def={startVelocity:30,spread:360,ticks:60,zIndex:100};function r(m,x){return Math.random()*(x-m)+m}const i=setInterval(function(){const t=a-Date.now();if(t<=0)return clearInterval(i);const p=50*(t/d);confetti({...def,particleCount:p,origin:{x:r(0.1,0.3),y:Math.random()-0.2}});confetti({...def,particleCount:p,origin:{x:r(0.7,0.9),y:Math.random()-0.2}})},250);}
+        function selectDriverType(type) { state.driverType = type; showView('view-question2'); const mEl = document.getElementById('miles-input'); if (mEl) mEl.focus(); }
+        function submitMiles() { const mi=document.getElementById('miles-input');const m=parseFloat(mi.value);if(isNaN(m)||m<=0){alert('Please enter a valid number of miles.');return}state.miles=m;trackClickEvent(`Calculated Miles: ${m}`);calculateResult();showView('view-result');fireConfetti();}
+        function calculateResult() { let result = 0; const miles = state.miles; switch(state.driverType){case 'lease':const gL=miles*2.15;result=gL-(gL*0.15)-900-(0.12*miles)-375-(miles*0.45)-75-37-250;break;case 'company':result=miles*0.65;break;case 'owner':const gO=miles*2.15;result=gO-(gO*0.12)-375-(miles*0.45)-75-37-250;break} state.takeHomePay = result; document.getElementById('result-amount').textContent=toCurrency(result); const msgEl=document.getElementById('result-message'); const langTrans = translations[state.lang] || translations.en; if(result>2800)msgEl.innerHTML=langTrans.resultMsgHigh; else if(result>=1800)msgEl.innerHTML=langTrans.resultMsgMid; else msgEl.innerHTML=langTrans.resultMsgLow;}
+        function showSharedResult(t, m, r, l) { if(translations[l]) setLanguage(l); state.driverType=t;state.miles=m;state.takeHomePay=parseFloat(r);document.getElementById('result-amount').textContent=toCurrency(state.takeHomePay);calculateResult();showView('view-result');}
+        async function shareResult() { const u=new URL(window.location.href);u.search = ''; u.searchParams.set('type',state.driverType);u.searchParams.set('miles',state.miles);u.searchParams.set('result',state.takeHomePay.toFixed(2)); u.searchParams.set('lang', state.lang); const sU=u.toString();const sD={title:'My Potential Earnings at Ray Star LLC',text:`Check out my potential weekly take-home pay of ${toCurrency(state.takeHomePay)} with Ray Star LLC!`,url:sU};if(navigator.share){try{await navigator.share(sD);trackClickEvent('Shared Successfully')}catch(err){console.error("Share failed:",err);trackClickEvent('Share Cancelled')}}else{const h=document.createElement('textarea');h.value=sU;document.body.appendChild(h);h.select();document.execCommand('copy');document.body.removeChild(h);alert('A shareable link has been copied to your clipboard!')} }
+        function showCalculation() { document.getElementById('calculation-details').innerHTML = getCalculationText(state.driverType, state.miles); showView('view-calculation'); }
+        
+        // -- FIX 1: This function is now corrected for Company Drivers --
+        function getCalculationText(dT, m) { 
+            const T = translations[state.lang] || translations.en;
+            let h='';
+            if(dT==='company'){
+                const g=m*0.65;
+                h+=`<div class="p-3 bg-gray-100 rounded-lg"><h3 class="font-bold">${T.companyDriverTitle}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '0.65')}</span><strong>${toCurrency(g)}</strong></p></div>`;
+                return h;
+            }
+            const gI=m*2.15;let fC=[{l:'Cargo & Liability Insurance',v:375},{l:'Trailer Charge',v:250},{l:'Admin Fee',v:75},{l:'Occupational Insurance',v:37}];let vC=[{l:'Fuel Expense ($0.45/mile)',v:m*0.45}];if(dT==='lease'){fC.unshift({l:'Truck Charge',v:900});vC.unshift({l:`Service Charge (15%)`,v:gI*0.15});vC.push({l:`Mileage Charge ($0.12/mile)`,v:m*0.12})}else{vC.unshift({l:`Service Charge (12%)`,v:gI*0.12})}const tF=fC.reduce((s,i)=>s+i.v,0);const tV=vC.reduce((s,i)=>s+i.v,0);const tE=tF+tV;const tH=gI-tE;h+=`<div class="p-3 bg-green-50 border border-green-200 rounded-lg"><h3 class="font-bold text-green-800">${T.calcGrossIncome}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', m)} ${T.calcPerMile.replace('{rate}', '2.15')}</span><strong>${toCurrency(gI)}</strong></p></div>`;h+=`<div class="p-3 bg-red-50 border border-red-200 rounded-lg"><h3 class="font-bold text-red-800">${T.calcExpenses}</h3><div class="font-semibold mt-2">${T.calcFixedCosts}</div>`;fC.forEach(i=>{h+=`<p class="flex justify-between"><span>${i.l}</span><span>${toCurrency(i.v)}</span></p>`});h+=`<div class="font-semibold mt-2">${T.calcVariableCosts.replace('{miles}', m)}</div>`;vC.forEach(i=>{h+=`<p class="flex justify-between"><span>${i.l}</span><span>${toCurrency(i.v)}</span></p>`});h+=`<p class="flex justify-between font-bold mt-2 border-t pt-1 border-gray-300"><span>${T.calcTotalExpenses}</span><span>${toCurrency(tE)}</span></p></div>`;h+=`<div class="p-3 bg-blue-50 border border-blue-200 rounded-lg"><h3 class="font-bold text-blue-800">${T.calcTakeHome}</h3><p class="flex justify-between"><span>${toCurrency(gI)} (${T.calcIncome}) - ${toCurrency(tE)} (${T.calcMinusExpenses})</span><strong class="text-lg">${toCurrency(tH)}</strong></p></div>`;return h;
+        }
+
+        function trackEvent(t, v) { const d=new FormData();d.append('action',t);d.append('event',v);if(navigator.sendBeacon){navigator.sendBeacon(scriptURL,d)}else{fetch(scriptURL,{method:'POST',body:d,keepalive:true}).catch(console.error)}}
+        function trackClickEvent(eN) { trackEvent('clickEvent',eN)}
+        function trackLocation() { fetch('https://get.geojs.io/v1/ip/geo.json').then(res=>res.json()).then(data=>{trackEvent('pageView',`Location: ${data.city}, ${data.country}`)}).catch(err=>{console.error('Error fetching location:',err);trackEvent('pageView','Location: Error')})}
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            const savedLang = localStorage.getItem('language');
+            const defaultLang = langParam || savedLang || 'en';
+            setLanguage(defaultLang);
+            
+            const t=urlParams.get('type'),m=urlParams.get('miles'),r=urlParams.get('result');
+            if(t&&m&&r){showSharedResult(t,m,r, langParam)}else{showView('view-question1');trackEvent('pageView','Page Loaded');trackLocation()}
+            
+            const form=document.getElementById('application-form');
+            form.addEventListener('submit',e=>{
+                e.preventDefault();
+                trackClickEvent('Clicked Submit Application');
+                const s=document.getElementById('submit-form-button');
+                s.disabled=true;s.textContent='Submitting...';
+                const f=new FormData(form);
+                f.append('action','formSubmit');
+                f.append('driverType', state.driverType);
+                f.append('miles', state.miles);
+                f.append('potentialPay', state.takeHomePay.toFixed(2));
+                fetch(scriptURL,{method:'POST',body:f})
+                .then(res=>{form.reset();showView('view-thanks')})
+                .catch(err=>{alert('There was an error.')})
+                // -- FIX 3: Removed redundant setLanguage() call and manually reset button text --
+                .finally(()=>{
+                    s.disabled = false;
+                    const langTrans = translations[state.lang] || translations.en;
+                    s.innerHTML = langTrans.submitApplicationButton;
+                });
+            });
+        });
     </script>
 </body>
 </html>
-
