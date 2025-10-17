@@ -34,6 +34,25 @@
         .progress-bar-fill { background-color: #1abc9c; transition: width 0.5s ease-in-out; }
         .lang-btn { font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 0.375rem; transition: background-color 0.2s, color 0.2s; text-align: left; width: 100%; }
         .lang-btn.active { background-color: #1abc9c; color: white; }
+        .btn-cta {
+            background-color: #ef4444; /* Tailwind's red-500 */
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        .btn-cta:hover {
+            background-color: #dc2626; /* Tailwind's red-600 */
+            animation: none; /* Pause animation on hover */
+        }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+        }
     </style>
 </head>
 <body class="antialiased bg-pattern">
@@ -91,7 +110,7 @@
                            <h2 class="text-xl font-bold text-center mb-4" data-key="question2Title">How many miles can you drive in a week?</h2>
                            <div class="space-y-4">
                                <input type="number" id="miles-input" class="w-full text-center text-lg p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
-                               <button onclick="trackClickEvent('Clicked Calculate'); submitMiles();" class="btn btn-action w-full" data-key="calculateButton">Calculate</button>
+                               <button onclick="submitMiles();" class="btn btn-action w-full" data-key="calculateButton">Calculate</button>
                            </div>
                        </div>
 
@@ -99,9 +118,12 @@
                            <h2 class="text-xl font-semibold text-gray-600 mb-2" data-key="resultTitle">Your Potential Take Home Is</h2>
                            <p id="result-amount" class="text-5xl font-extrabold text-gray-900 mb-2">$0.00</p>
                            <div id="result-message" class="p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 text-sm mb-4"></div>
-                           <button onclick="trackClickEvent('Clicked See Calculation'); showCalculation();" class="text-sm text-indigo-600 hover:underline mb-4" data-key="seeCalculationLink">See how we calculated this</button>
+                           
+                           <!-- UPDATED: "See Calculation" button is now styled as a link -->
+                           <button onclick="trackClickEvent('Clicked See Calculation'); showCalculation();" class="text-sm text-indigo-600 hover:underline font-semibold py-2 mb-4" data-key="seeCalculationLink">See how we calculated this</button>
+                           
                            <div class="space-y-3">
-                               <button onclick="trackClickEvent('Clicked APPLY NOW'); showView('view-apply');" class="btn btn-action w-full text-lg" data-key="applyNowButton">APPLY NOW</button>
+                               <button onclick="trackClickEvent('Clicked APPLY NOW'); showView('view-apply');" class="btn btn-cta w-full text-lg" data-key="applyNowButton">APPLY NOW</button>
                                <button onclick="trackClickEvent('Clicked Share Estimate'); shareResult();" class="btn bg-gray-200 hover:bg-gray-300 text-gray-800 w-full flex items-center justify-center space-x-2">
                                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path></svg>
                                    <span data-key="shareButton">Share Estimate</span>
@@ -158,11 +180,25 @@
         
         const translations = {
             en: {
-                promoTitle: 'Earn up to $6000/week with us!', appTitle: 'Truck Driver Pay Calculator', progressText: 'Step {step} of 3: {page}', promoSubtitle: 'Find out your potential take-home pay below.', question1Title: 'What type of driver are you?', leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator', question2Title: 'How many miles can you drive in a week?', milesPlaceholder: 'e.g., 2500', calculateButton: 'Calculate', resultTitle: 'Your Potential Take Home Is', resultMsgHigh: '&#127942; Outstanding result! You\'re in the top tier of earners.', resultMsgMid: '&#x2728; Excellent result! This is a strong, competitive income.', resultMsgLow: '&#x1F4C8; A great starting point with solid potential for growth.', seeCalculationLink: 'See how we calculated this', applyNowButton: 'APPLY NOW', shareButton: 'Share Estimate', newCalculationButton: 'Start a New Calculation', applyTitle: 'Apply Now', applySubtitle: 'You\'re one step away! Fill out your info below.', fullNamePlaceholder: 'Full name', phonePlaceholder: 'Phone number', emailPlaceholder: 'Email', privacyLink: 'Learn how we use your personal data', submitApplicationButton: 'Submit Application', thanksTitle: 'Thank You!', thanksSubtitle: 'Your application has been submitted. We will be in touch shortly.', startOverButton: 'Start Over', breakdownTitle: 'Calculation Breakdown', copyright: '&copy; 2025 Ray Star LLC. All Rights Reserved.', contactUs: 'Contact Us', calcGrossIncome: '1. Gross Income', calcMilesDriven: '{miles} miles', calcPerMile: '× ${rate}/mile', calcExpenses: '2. Estimated Expenses', calcFixedCosts: 'Fixed Costs:', calcVariableCosts: 'Variable Costs (for {miles} miles):', calcTotalExpenses: 'Total Estimated Expenses', calcTakeHome: '3. Potential Take-Home', calcIncome: 'Income', calcMinusExpenses: 'Expenses',
+                promoTitle: 'Earn up to $6000/week with us!', appTitle: 'Truck Driver Pay Calculator', progressText: 'Step {step} of 3: {page}', promoSubtitle: 'Find out your potential take-home pay below.', question1Title: 'What type of driver are you?', leaseButton: 'Lease Operator', companyButton: 'Company Driver', ownerButton: 'Owner Operator', question2Title: 'How many miles can you drive in a week?', milesPlaceholder: 'e.g., 2500', calculateButton: 'Calculate', resultTitle: 'Your Potential Take Home Is', resultMsgHigh: '&#127942; Outstanding result! You\'re in the top tier of earners.', resultMsgMid: '&#x2728; Excellent result! This is a strong, competitive income.', resultMsgLow: '&#x1F4C8; A great starting point with solid potential for growth.', seeCalculationLink: 'See how we calculated this', applyNowButton: 'APPLY NOW', shareButton: 'Share Estimate', newCalculationButton: 'Start a New Calculation', applyTitle: 'Apply Now', applySubtitle: 'You\'re one step away! Fill out your info below.', fullNamePlaceholder: 'Full name', phonePlaceholder: 'Phone number', emailPlaceholder: 'Email', submitApplicationButton: 'Submit Application', thanksTitle: 'Thank You!', thanksSubtitle: 'Your application has been submitted. We will be in touch shortly.', startOverButton: 'Start Over', breakdownTitle: 'Calculation Breakdown', copyright: '&copy; 2025 Ray Star LLC. All Rights Reserved.', contactUs: 'Contact Us', companyDriverTitle: 'Company Driver Pay',
+                progressStep1: 'Driver Type', progressStep2: 'Weekly Miles', progressStep3: 'Your Results',
+                calcGrossIncome: '1. Gross Income', calcMilesDriven: '{miles} miles', calcPerMile: '× ${rate}/mile', calcExpenses: '2. Estimated Expenses', calcFixedCosts: 'Fixed Costs:', calcVariableCosts: 'Variable Costs (for {miles} miles):', calcTotalExpenses: 'Total Estimated Expenses', calcTakeHome: '3. Potential Take-Home', calcIncome: 'Income', calcMinusExpenses: 'Expenses'
             },
-            es: { /* ... Spanish ... */ },
-            ru: { /* ... Russian ... */ },
-            uz: { /* ... Uzbek ... */ }
+            es: {
+                promoTitle: '¡Gana hasta $6000/semana con nosotros!', appTitle: 'Calculadora de Pago para Camioneros', progressText: 'Paso {step} de 3: {page}', promoSubtitle: 'Descubre tu pago potencial a continuación.', question1Title: '¿Qué tipo de conductor eres?', leaseButton: 'Operador de Arrendamiento', companyButton: 'Conductor de Compañía', ownerButton: 'Propietario Operador', question2Title: '¿Cuántas millas puedes conducir en una semana?', milesPlaceholder: 'ej., 2500', calculateButton: 'Calcular', resultTitle: 'Tu Pago Potencial Es', resultMsgHigh: '&#127942; ¡Resultado sobresaliente! Estás en el nivel más alto de ingresos.', resultMsgMid: '&#x2728; ¡Excelente resultado! Este es un ingreso fuerte y competitivo.', resultMsgLow: '&#x1F4C8; Un gran punto de partida con un sólido potencial de crecimiento.', seeCalculationLink: 'Ver cómo calculamos esto', applyNowButton: 'APLICAR AHORA', shareButton: 'Compartir Estimación', newCalculationButton: 'Empezar un Nuevo Cálculo', applyTitle: 'Aplicar Ahora', applySubtitle: '¡Estás a un paso! Completa tu información.', fullNamePlaceholder: 'Nombre completo', phonePlaceholder: 'Número de teléfono', emailPlaceholder: 'Correo electrónico', submitApplicationButton: 'Enviar Solicitud', thanksTitle: '¡Gracias!', thanksSubtitle: 'Tu solicitud ha sido enviada. Nos pondremos en contacto pronto.', startOverButton: 'Empezar de Nuevo', breakdownTitle: 'Desglose del Cálculo', copyright: '&copy; 2025 Ray Star LLC. Todos los derechos reservados.', contactUs: 'Contáctanos', companyDriverTitle: 'Pago de Conductor de Compañía',
+                progressStep1: 'Tipo de Conductor', progressStep2: 'Millas Semanales', progressStep3: 'Tus Resultados',
+                calcGrossIncome: '1. Ingresos Brutos', calcMilesDriven: '{miles} millas', calcPerMile: '× ${rate}/milla', calcExpenses: '2. Gastos Estimados', calcFixedCosts: 'Costos Fijos:', calcVariableCosts: 'Costos Variables (para {miles} millas):', calcTotalExpenses: 'Total de Gastos Estimados', calcTakeHome: '3. Pago Potencial', calcIncome: 'Ingresos', calcMinusExpenses: 'Gastos'
+            },
+            ru: {
+                promoTitle: 'Зарабатывайте до $6000 в неделю с нами!', appTitle: 'Калькулятор Зарплаты Водителя', progressText: 'Шаг {step} из 3: {page}', promoSubtitle: 'Узнайте вашу потенциальную зарплату ниже.', question1Title: 'Какой вы тип водителя?', leaseButton: 'Водитель в лизинге', companyButton: 'Водитель компании', ownerButton: 'Владелец-оператор', question2Title: 'Сколько миль вы проезжаете в неделю?', milesPlaceholder: 'например, 2500', calculateButton: 'Рассчитать', resultTitle: 'Ваш Потенциальный Доход', resultMsgHigh: '&#127942; Выдающийся результат! Вы входите в число самых высокооплачиваемых водителей.', resultMsgMid: '&#x2728; Отличный результат! Это сильный, конкурентоспособный доход.', resultMsgLow: '&#x1F4C8; Отличная отправная точка с солидным потенциалом для роста.', seeCalculationLink: 'Посмотреть расчеты', applyNowButton: 'ПОДАТЬ ЗАЯВКУ', shareButton: 'Поделиться расчетом', newCalculationButton: 'Начать новый расчет', applyTitle: 'Подать заявку', applySubtitle: 'Остался один шаг! Заполните ваши данные.', fullNamePlaceholder: 'Полное имя', phonePlaceholder: 'Номер телефона', emailPlaceholder: 'Электронная почта', submitApplicationButton: 'Отправить заявку', thanksTitle: 'Спасибо!', thanksSubtitle: 'Ваша заявка отправлена. Мы скоро с вами свяжемся.', startOverButton: 'Начать сначала', breakdownTitle: 'Детализация Расчета', copyright: '&copy; 2025 Ray Star LLC. Все права защищены.', contactUs: 'Свяжитесь с нами', companyDriverTitle: 'Зарплата водителя компании',
+                progressStep1: 'Тип водителя', progressStep2: 'Мили в неделю', progressStep3: 'Ваши результаты',
+                calcGrossIncome: '1. Валовый доход', calcMilesDriven: '{miles} миль', calcPerMile: '× ${rate}/милю', calcExpenses: '2. Предполагаемые расходы', calcFixedCosts: 'Фиксированные расходы:', calcVariableCosts: 'Переменные расходы (на {miles} миль):', calcTotalExpenses: 'Итого предполагаемых расходов', calcTakeHome: '3. Потенциальный доход', calcIncome: 'Доход', calcMinusExpenses: 'Расходы'
+            },
+            uz: {
+                promoTitle: 'Biz bilan haftasiga $6000 gacha ishlang!', appTitle: 'Haydovchi Ish Haqini Hisoblash', progressText: 'Qadam {step}/3: {page}', promoSubtitle: 'Potentsial daromadingizni quyida bilib oling.', question1Title: 'Siz qanday turdagi haydovchisiz?', leaseButton: 'Ijara Operator', companyButton: 'Kompaniya Haydovchisi', ownerButton: 'Mulkor Operator', question2Title: 'Haftasiga necha mil haydaysiz?', milesPlaceholder: 'masalan, 2500', calculateButton: 'Hisoblash', resultTitle: 'Sizning Potentsial Daromadingiz', resultMsgHigh: '&#127942; Ajoyib natija! Siz eng yuqori daromad oluvchilar qatoridasiz.', resultMsgMid: '&#x2728; Ajoyib natija! Bu kuchli, raqobatbardosh daromad.', resultMsgLow: '&#x1F4C8; O\'sish uchun yaxshi potentsialga ega ajoyib boshlanish.', seeCalculationLink: 'Qanday hisoblaganimizni ko\'ring', applyNowButton: 'HOZIR MUROJAAT QILING', shareButton: 'Hisob-kitobni Ulashish', newCalculationButton: 'Yangi Hisob-kitob', applyTitle: 'Murojaat Qiling', applySubtitle: 'Bir qadam qoldi! Ma\'lumotlaringizni to\'ldiring.', fullNamePlaceholder: 'To\'liq ism', phonePlaceholder: 'Telefon raqami', emailPlaceholder: 'Elektron pochta', submitApplicationButton: 'Arizani Yuborish', thanksTitle: 'Rahmat!', thanksSubtitle: 'Arizangiz yuborildi. Tez orada siz bilan bog\'lanamiz.', startOverButton: 'Boshidan Boshlash', breakdownTitle: 'Hisob-kitob Tafsilotlari', copyright: '&copy; 2025 Ray Star LLC. Barcha huquqlar himoyalangan.', contactUs: 'Biz bilan bog\'laning', companyDriverTitle: 'Kompaniya haydovchisining ish haqi',
+                progressStep1: 'Haydovchi Turi', progressStep2: 'Haftalik Milya', progressStep3: 'Sizning Natijalaringiz',
+                calcGrossIncome: '1. Yalpi daromad', calcMilesDriven: '{miles} mil', calcPerMile: '× ${rate}/mil uchun', calcExpenses: '2. Taxminiy xarajatlar', calcFixedCosts: 'Doimiy xarajatlar:', calcVariableCosts: 'O\'zgaruvchan xarajatlar ({miles} mil uchun):', calcTotalExpenses: 'Jami taxminiy xarajatlar', calcTakeHome: '3. Potentsial daromad', calcIncome: 'Daromad', calcMinusExpenses: 'Xarajatlar'
+            }
         };
         
         const state = { driverType: null, miles: 0, takeHomePay: 0, lang: 'en' };
@@ -182,7 +218,7 @@
 
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
-                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+                if (translations[lang] && translations[lang][key]) el.innerHTML = translations[lang][key];
             });
 
             const milesInput = document.getElementById('miles-input');
@@ -195,6 +231,9 @@
             });
 
             if (state.driverType) calculateResult();
+            
+            const currentView = document.querySelector('.view:not(.hidden)');
+            if (currentView) showView(currentView.id);
         }
 
         function showView(viewId) {
@@ -208,16 +247,17 @@
             if (backMap[viewId]) backArrow.onclick = () => showView(backMap[viewId]);
 
             const progressConfig = {
-                'view-question1': { step: 1, text: 'Driver Type', width: '33%' },
-                'view-question2': { step: 2, text: 'Weekly Miles', width: '66%' },
-                'view-result': { step: 3, text: 'Your Results', width: '100%' }
+                'view-question1': { step: 1, pageKey: 'progressStep1', width: '33%' },
+                'view-question2': { step: 2, pageKey: 'progressStep2', width: '66%' },
+                'view-result': { step: 3, pageKey: 'progressStep3', width: '100%' }
             };
             const config = progressConfig[viewId];
             document.getElementById('progress-container').style.visibility = config ? 'visible' : 'hidden';
             if (config) {
                 document.getElementById('progress-bar').style.width = config.width;
                 const T = translations[state.lang] || translations.en;
-                document.getElementById('progress-text').innerHTML = T.progressText.replace('{step}', config.step).replace('{page}', config.text);
+                const pageText = T[config.pageKey] || '';
+                document.getElementById('progress-text').innerHTML = T.progressText.replace('{step}', config.step).replace('{page}', pageText);
             }
         }
 
@@ -230,6 +270,7 @@
             const miles = parseInt(document.getElementById('miles-input').value, 10);
             if (isNaN(miles) || miles <= 0) return alert('Please enter a valid number of miles.');
             state.miles = miles;
+            trackClickEvent(`Calculated Miles: ${miles}`);
             calculateResult();
             showView('view-result');
             confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
@@ -253,14 +294,42 @@
         }
 
         function getCalculationText() {
-             const T = translations[state.lang] || translations.en;
-             // This is a simplified version. A more detailed one could be built here.
-             return `<div class="p-3 bg-gray-50 rounded-lg border">
-                <p><strong>Driver Type:</strong> ${state.driverType}</p>
-                <p><strong>Weekly Miles:</strong> ${state.miles}</p>
-                <p class="mt-2 border-t pt-2">Based on our current rates, your estimated take-home pay is calculated by taking the gross income and subtracting estimated expenses like fuel, insurance, and service charges.</p>
-                <p class="font-bold text-lg mt-2">${T.resultTitle}: ${state.takeHomePay.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-             </div>`;
+            const T = translations[state.lang] || translations.en;
+            const toCurr = (num) => num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            let html = '';
+            
+            if (state.driverType === 'company') {
+                const gross = state.miles * 0.65;
+                html += `<div class="p-3 bg-gray-100 rounded-lg"><h3 class="font-bold">${T.companyDriverTitle}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', state.miles)} ${T.calcPerMile.replace('{rate}', '0.65')}</span><strong>${toCurr(gross)}</strong></p></div>`;
+                return html;
+            }
+            
+            const grossIncome = state.miles * 2.15;
+            let fixedCosts = [{l:'Cargo & Liability Insurance',v:375},{l:'Trailer Charge',v:250},{l:'Admin Fee',v:75},{l:'Occupational Insurance',v:37}];
+            let varCosts = [{l:`Fuel Expense ($0.45/mile)`,v:state.miles*0.45}];
+
+            if (state.driverType === 'lease') {
+                fixedCosts.unshift({l:'Truck Charge',v:900});
+                varCosts.unshift({l:`Service Charge (15%)`,v:grossIncome*0.15});
+                varCosts.push({l:`Mileage Charge ($0.12/mile)`,v:state.miles*0.12});
+            } else { // Owner
+                varCosts.unshift({l:`Service Charge (12%)`,v:grossIncome*0.12});
+            }
+
+            const totalFixed = fixedCosts.reduce((sum, item) => sum + item.v, 0);
+            const totalVar = varCosts.reduce((sum, item) => sum + item.v, 0);
+            const totalExpenses = totalFixed + totalVar;
+            const takeHome = grossIncome - totalExpenses;
+
+            html += `<div class="p-3 bg-green-50 border border-green-200 rounded-lg"><h3 class="font-bold text-green-800">${T.calcGrossIncome}</h3><p class="flex justify-between"><span>${T.calcMilesDriven.replace('{miles}', state.miles)} ${T.calcPerMile.replace('{rate}', '2.15')}</span><strong>${toCurr(grossIncome)}</strong></p></div>`;
+            html += `<div class="p-3 bg-red-50 border border-red-200 rounded-lg"><h3 class="font-bold text-red-800">${T.calcExpenses}</h3><div class="font-semibold mt-2">${T.calcFixedCosts}</div>`;
+            fixedCosts.forEach(i => { html += `<p class="flex justify-between"><span>${i.l}</span><span>${toCurr(i.v)}</span></p>` });
+            html += `<div class="font-semibold mt-2">${T.calcVariableCosts.replace('{miles}', state.miles)}</div>`;
+            varCosts.forEach(i => { html += `<p class="flex justify-between"><span>${i.l}</span><span>${toCurr(i.v)}</span></p>` });
+            html += `<p class="flex justify-between font-bold mt-2 border-t pt-1 border-gray-300"><span>${T.calcTotalExpenses}</span><span>${toCurr(totalExpenses)}</span></p></div>`;
+            html += `<div class="p-3 bg-blue-50 border border-blue-200 rounded-lg"><h3 class="font-bold text-blue-800">${T.calcTakeHome}</h3><p class="flex justify-between"><span>${toCurr(grossIncome)} (${T.calcIncome}) - ${toCurr(totalExpenses)} (${T.calcMinusExpenses})</span><strong class="text-lg">${toCurr(takeHome)}</strong></p></div>`;
+            
+            return html;
         }
 
         function showCalculation() {
@@ -337,7 +406,7 @@
 
                 fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
                     .then(() => showView('view-thanks'))
-                    .catch(() => showView('view-thanks')) // Show thanks even on CORS error
+                    .catch(() => showView('view-thanks')) 
                     .finally(() => {
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = originalText;
